@@ -14,6 +14,7 @@ class FrontController extends Controller
     	return view('index');
     }
 
+     
 
 //Collection Ownner Informations:
     public function signup(){ 								//ownerinfo
