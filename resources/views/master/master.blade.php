@@ -4,18 +4,18 @@
 		<title></title>
 		<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link href="{{url('public/Frontend')}}/css/bootstrap.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/css/menu.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/css/superfish.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/css/meanmenu.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/css/style.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/css/color.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/css/bootstrap.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/css/menu.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/css/superfish.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/css/meanmenu.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/css/style.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/css/color.css" rel="stylesheet">
 		
 	<!-- font awesome this template -->
-		<link href="{{url('public/Frontend')}}/fonts/css/font-awesome.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/fonts/css/font-awesome.min.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/fonts/font/FontAwesome.otf" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/fonts/font/fontawesome-webfont.ttf" rel="stylesheet"> 
+		<link href="{{url('Frontend')}}/fonts/css/font-awesome.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/fonts/css/font-awesome.min.css" rel="stylesheet">
+		<link href="{{url('Frontend')}}/fonts/font/FontAwesome.otf" rel="stylesheet">
+		<link href="{{url('Frontend')}}/fonts/font/fontawesome-webfont.ttf" rel="stylesheet"> 
 	</head>
 	<body>
 	<!-- --------------------------------Menu Section Start--------------------------------- -->
@@ -25,7 +25,7 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="logo">
-							<a href="#"><img src="{{url('public/Frontend')}}/images/logo.png"></a>
+							<a href="#"><img src="{{url('Frontend')}}/images/logo.png"></a>
 						</div>
 					</div>
 					<div class="col-sm-10">
@@ -105,19 +105,19 @@
 								<div class="footer_content">
 									<ul>
 				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/artis2.JPG" alt="image">  <a href="#">NWU will remain closed on Tuesday, 15 May,   City Corporation Election.</a></p>
+				                        <p> <img src="{{url('Frontend')}}/images/artis2.JPG" alt="image">  <a href="#">NWU will remain closed on Tuesday, 15 May,   City Corporation Election.</a></p>
 				                      </li>
 				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/WC21024.jpg" alt="image">  <a href="#">  NWU will remain closed on 17.03.2018.   17.03.2018.</a></p>
+				                        <p> <img src="{{url('Frontend')}}/images/WC21024.jpg" alt="image">  <a href="#">  NWU will remain closed on 17.03.2018.   17.03.2018.</a></p>
 				                      </li>
 				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/GE0561.jpg" alt="image">  <a href="#">Committee of Pahela Baishakh 1425</a></p>
+				                        <p> <img src="{{url('Frontend')}}/images/GE0561.jpg" alt="image">  <a href="#">Committee of Pahela Baishakh 1425</a></p>
 				                      </li>
 				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/images (2).jpg" alt="image">  <a href="#">Independence and National Day   Bangladesh.</a></p>
+				                        <p> <img src="{{url('Frontend')}}/images/images (2).jpg" alt="image">  <a href="#">Independence and National Day   Bangladesh.</a></p>
 				                      </li>
 				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/lged_1.gif" alt="image">  <a href="#">NWU will remain closed on Tuesday, 15 May,   Election.</a></p>
+				                        <p> <img src="{{url('Frontend')}}/images/lged_1.gif" alt="image">  <a href="#">NWU will remain closed on Tuesday, 15 May,   Election.</a></p>
 				                      </li>
 				                    </ul>
 								</div>
@@ -202,15 +202,15 @@
 		</div>
 		
 		
-		<script src="{{url('public/Frontend')}}/js/jquery.js"></script>
-		<script src="{{url('public/Frontend')}}/js/bootstrap.min.js"></script>
-		<script src="{{url('public/Frontend')}}/js/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="{{url('public/Frontend')}}/js/custom.js" type="text/javascript"></script>
-		<script src="{{url('public/Frontend')}}/js/superfish.js" type="text/javascript"></script>
-		<script src="{{url('public/Frontend')}}/js/jquery.meanmenu.js" type="text/javascript"></script>
-		<script src="{{url('public/Frontend')}}/js/skill/jquery.inview.js"></script>   
-		<script src="{{url('public/Frontend')}}/js/skill/jquery.easy-pie-chart.js"></script>
-		<script src="{{url('public/Frontend')}}/js/skill/resume-custom.js"></script>  
+		<script src="{{url('Frontend')}}/js/jquery.js"></script>
+		<script src="{{url('Frontend')}}/js/bootstrap.min.js"></script>
+		<script src="{{url('Frontend')}}/js/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="{{url('Frontend')}}/js/custom.js" type="text/javascript"></script>
+		<script src="{{url('Frontend')}}/js/superfish.js" type="text/javascript"></script>
+		<script src="{{url('Frontend')}}/js/jquery.meanmenu.js" type="text/javascript"></script>
+		<script src="{{url('Frontend')}}/js/skill/jquery.inview.js"></script>   
+		<script src="{{url('Frontend')}}/js/skill/jquery.easy-pie-chart.js"></script>
+		<script src="{{url('Frontend')}}/js/skill/resume-custom.js"></script>  
 
 		<script type="text/javascript">
 			$('#car_metro').keyup(function(){
