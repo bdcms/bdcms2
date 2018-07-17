@@ -34,3 +34,5 @@ Route::post('/driSingup/','FrontController@driSingup');
 
 Route::any('/area_search/','FrontController@district');
 Route::any('/key_search/','FrontController@keyword');
+
+Route::get('/hello','FrontController@xxx');
