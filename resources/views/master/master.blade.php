@@ -31,11 +31,11 @@
 					<div class="col-sm-10">
 						<nav>
 							<ul class="sf-menu">
-								<li class=" current active"><a href="index.html">Home</a></li>
+								<li class=" current active"><a href="{{URL::to('/')}}">Home</a></li>
 								<li><a href="about.html">About</a></li>   
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="contact.html">Contact Us</a></li>
-								<li><a href="login.html">Login</a></li>
+								<li><a href="{{URL::to('/login')}}">Login</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -75,11 +75,11 @@
 										</li>
 										<li>
 											<span><i class="fa fa-check"></i></span>
-											<a href="#">Bd Jobs.com.</a>
+											<a href="{{URL::to('/driverSignup')}}">Driver sign up</a>
 										</li>
 										<li>
 											<span><i class="fa fa-check"></i></span>
-											<a href="driver_signup.html">Driver sign up</a>
+											<a href="#">Bd Jobs.com.</a>
 										</li>
 										<li>
 											<span><i class="fa fa-check"></i></span>

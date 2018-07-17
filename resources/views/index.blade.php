@@ -35,8 +35,7 @@
 									<div class="col-md-6">  
 								  		<div class="input_box_search">
 								  			<input type="text" class="input-medium  search-query" placeholder="Car Number...">
-								  			<!-- <button type="submit" class="btn search_btn">Search</button>  -->
-								  			<a href="search_out.html">Search</a>
+								  			<button type="submit" class="btn search_btn">Search</button>  
 								  		</div>
 									</div> 
 								</form> 

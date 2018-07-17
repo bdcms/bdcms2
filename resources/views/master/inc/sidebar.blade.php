@@ -12,7 +12,7 @@
 						</div>
 						<div class="sidebar_section clear">
 							<div class="sidebar_heading clear">
-								<a class="clear" href="signup.html"><h5>Application</h5></a>
+								<a class="clear" href="{{URL::to('/ownerinfo')}}"><h5>Application</h5></a>
 							</div>  
 						</div>
 						 
