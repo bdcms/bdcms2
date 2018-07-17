@@ -1,0 +1,17 @@
+.filter_table{float: left;width: 100%;margin-bottom: 30px;}
+.filter_table form-actions{margin: 0;padding: 0;float: left;width: 100%;} 
+.filter_table .control-group{width: 225px;float: left;margin: 0;padding: 0;padding-top: 10px;}
+.filter_table .control-group select{height: 35px;}
+.cus_col_lg_6{width: 60%;float: left;}
+.cus_col_lg_7{width: 70%;float: left;}
+.cus_col_lg_3{width: 30%;float: left;}
+.section_heading_custom h6{font-family: sans-serif;
+    font-size: 14px;
+    outline: none;color: #0083E9;
+    font-weight: bold;}
+
+    .filter_table .form-actions{width:100px;float: left;border:0px;background: none;margin: 0;padding: 0;margin-top: 30px;}
+    .dataTables_filter{float: right;}
+    .profile_image{float: left;width: 100%}
+    .profile_image img{float: left; padding-right: 15px;height: 200px;width: 200px;}
+    .profile_image h6{margin-top: 30px;color: #0083E9}

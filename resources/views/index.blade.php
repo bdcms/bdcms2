@@ -21,24 +21,35 @@
 							<div class="car_number_search">
 								<div class="col-lg-12 col-md-12 col-sm-12"><h3>Search car Details......</h3></div>
 								 
-								<form class="form-search">
-									<div class="col-md-3"> 
-										<div class="input_box_search">
-								  			<input type="text" class="input-medium " placeholder="District.."> 
-								  		</div>
-									</div>
-									<div class="col-md-3"> 
-										<div class="input_box_search">
-								  			<input type="text" class="input-medium " placeholder="Character.."> 
-								  		</div>
-									</div>
-									<div class="col-md-6">  
-								  		<div class="input_box_search">
-								  			<input type="text" class="input-medium  search-query" placeholder="Car Number...">
-								  			<button type="submit" class="btn search_btn">Search</button>  
-								  		</div>
-									</div> 
-								</form> 
+<form class="form-search" action="{{URL('/Search_Car')}}" method="POST">
+	{{csrf_field()}}
+
+	<div class="col-md-3"> 
+		<label for="exampleInputEmail1">Example: Khulna</label>
+		<div class="input_box_search">
+  			<input type="text" name="district" class="input-medium " placeholder="District.." value="{{Request::old('district')}}"> 
+  		</div>
+  		<span class="error_message">{{ $errors->first('district')}} </span>
+	</div>
+
+	<div class="col-md-3"> 
+		<label for="exampleInputEmail1">Example: HA</label>
+		<div class="input_box_search">
+  			<input type="text" class="input-medium " name="digits" placeholder="Character.." value="{{Request::old('digits')}}"> 
+  		</div>
+  		<span class="error_message">{{ $errors->first('digits')}} </span>
+	</div>
+
+	<div class="col-md-6">  
+  		<label for="exampleInputEmail1">Example:123456</label>
+  		<div class="input_box_search">
+  			<input type="text" class="input-medium  search-query" name="number" placeholder="Car Number..." value="{{Request::old('number')}}">
+  			<button type="submit" class="btn search_btn">Search</button>  
+  		</div>
+  		<span class="error_message">{{ $errors->first('number')}} </span>
+	</div> 
+
+</form> 
 							</div>	
 						</div>	
 					</div>	

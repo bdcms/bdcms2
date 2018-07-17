@@ -974,7 +974,7 @@ width: 200px;
 .custom_according{width: 23.8%;float: left;  margin-right:15px;overflow: hidden;margin-bottom: 15px !important; }
 .custom_according .panel-heading{text-align: center;} 
 
-
+ .error_message{float: left;width: 100%;color: red;}
     
  
  
@@ -1072,7 +1072,7 @@ width: 200px;
  
  
  
- 
+
  
  
  

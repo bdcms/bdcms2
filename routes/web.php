@@ -36,3 +36,6 @@ Route::any('/area_search/','FrontController@district');
 Route::any('/key_search/','FrontController@keyword');
 
 Route::get('/hello','FrontController@xxx');
+
+//CAR INFORMATION SEARCHING
+Route::post('/Search_Car','CarSearchingController@CarInformation');
