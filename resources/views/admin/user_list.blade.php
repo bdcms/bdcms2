@@ -140,7 +140,7 @@
 					<td class="center">{{$value->user_email}}</td>
 					<td class="center">{{$value->user_mobile}}</td>
 					<td class="center">{{$value->user_lisence}}</td> 
-					<td class="center">{{$car_info->car_reg_num}}</td> 
+					<td class="center">@if(isset($car_info->car_reg_num)){{$car_info->car_reg_num}}@endif</td> 
 					<td class="center">
 						<img style="height: 100px;width: 100px;" src="@if($value->user_profile_pic !=NULL) 
 						{{$value->user_profile_pic}} @else {{URL::to("/public/Frontend/images/profile_img.jpg")}} @endif">
