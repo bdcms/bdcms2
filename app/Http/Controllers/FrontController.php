@@ -156,6 +156,25 @@ class FrontController extends Controller
 	    		exit();
 	    	} 
 
+	     $ownId = \DB::table('users')->insertGetId([
+	    	'user_name'			=> session('user_name'),
+	    	'user_fname'		=> session('user_fname'),
+	    	'user_profile_pic'	=> session('user_profile_pic'),
+	    	'user_email'		=> session('user_email'),
+	    	'user_password'		=> md5(session('user_password')),
+	    	'user_mobile'		=> session('user_mobile'),
+	    	//'car_id'			=> $carId,
+	    	'user_address'		=> session('user_address'),
+	    	'user_birthday'		=> session('user_birth_date'),
+	    	'user_gender'		=> session('user_gender'),
+	    	'driver_id'			=> session('driver_id'),
+	    	'user_passport'		=> session('user_passport'),
+	    	'user_lisence'		=> session('user_lincence'),
+	    	'user_nid'			=> session('user_nid'),
+	    	'role_id'			=> 2, //owner role id
+	    	'remember_token'	=> str_random(25)
+	    ]);
+
 	    $carId = \DB::table('cars')->insertGetId([
 	    	'carname_id'			=> session('carname_id'),
 	    	'car_wheel'				=> session('car_wheel'),
@@ -167,30 +186,13 @@ class FrontController extends Controller
 	    	'car_road_permit_no'	=> session('car_road_permit_no'),
 	    	'car_engine_num'		=> session('car_engine_num'),
 	    	'car_pic'				=> session('car_pic'),
-	    	//'driver_id'				=> session('driver_id'),
-	    	//'owner_id'				=> $ownId,
+	    	'driver_id'				=> session('driver_id'),
+	    	'owner_id'				=> $ownId,
 	    	'car_document_pdf'		=> session('car_document_pdf'),
 	    	'car_color'				=> session('car_color'), 
 	    ]);
 
-	    $ownId = \DB::table('users')->insertGetId([
-	    	'user_name'			=> session('user_name'),
-	    	'user_fname'		=> session('user_fname'),
-	    	'user_profile_pic'	=> session('user_profile_pic'),
-	    	'user_email'		=> session('user_email'),
-	    	'user_password'		=> md5(session('user_password')),
-	    	'user_mobile'		=> session('user_mobile'),
-	    	'car_id'			=> $carId,
-	    	'user_address'		=> session('user_address'),
-	    	'user_birthday'		=> session('user_birth_date'),
-	    	'user_gender'		=> session('user_gender'),
-	    	'driver_id'			=> session('driver_id'),
-	    	'user_passport'		=> session('user_passport'),
-	    	'user_lisence'		=> session('user_lincence'),
-	    	'user_nid'			=> session('user_nid'),
-	    	'role_id'			=> 2, //owner role id
-	    	'remember_token'	=> str_random(25)
-	    ]);
+	   
 
 
 	    $done = \DB::table('users')->where('id',session('driver_id'))->update(['car_id' => $carId]);

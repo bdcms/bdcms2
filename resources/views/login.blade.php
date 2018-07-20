@@ -9,9 +9,12 @@
 				<h6>BDCMS user login</h6>
 				<div class="login_div">
 				<div class="imag_login"><img src="{{url('public/Frontend/')}}/images/profile_img.jpg"></div>
-					<form class="form-inline" method="post" action="{{url('checkLogin/')}}">
-					  	<input type="email" class="input-small" name = "email" placeholder="Email">
-					  	<input type="password" class="input-small" name="password" placeholder="Password">
+					<form class="form-inline" method="post" action="{{url('User_Login')}}">
+						{{csrf_field()}} 
+					  	<input type="text" class="input-small" name = "email" placeholder="Email" value="{{Request::old('email')}}">
+					  	<span class="error_message">{{ $errors->first('email')}} </span>
+					  	<input type="password" class="input-small" name="password" placeholder="Password" value="{{Request::old('password')}}">
+					  	<span class="error_message">{{ $errors->first('password')}} </span>
 
 					    <label>
 					      <input type="checkbox"> <span> Remember me</span>
@@ -19,7 +22,7 @@
 					 
 					  	<button type="submit" class="btn sign_in_btn">Sign in</button>
 					</form>
-					<p><a href="">Forget Password</a> <a href="signup.html">Sign Up</a></p>
+					<p><a href="{{URL::to('/ownerinfo')}}">Forget Password</a> <a href="{{URL::to('/ownerinfo')}}">Sign Up</a></p>
 				</div>				
 			</div>
 		</div>

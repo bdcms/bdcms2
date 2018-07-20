@@ -25,8 +25,7 @@ ul.sf-menu li span {
 ul.sf-menu > li > a,
 ul.sf-menu > li > span {
 	padding: 0 31px;
-	font: 14px/71px 'Arial';
-	height: 70px;
+	font: 14px/71px 'Arial'; 
 	color: #fff;
 	text-decoration: none;
 }

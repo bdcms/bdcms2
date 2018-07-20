@@ -9,6 +9,7 @@
 	        @endif
 	<!-- --------------------------------Slider Section Start--------------------------------- -->
 	 
+
 	<!-- --------------------------------Slider Section Exit--------------------------------- -->
 	<!-- --------------------------------Welcome Section Start--------------------------------- --> 
 	<section class="section_class">
@@ -18,6 +19,7 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="container"> 
 						<div class="row">
+							
 							<div class="car_number_search">
 								<div class="col-lg-12 col-md-12 col-sm-12"><h3>Search car Details......</h3></div>
 								 
@@ -27,7 +29,8 @@
 	<div class="col-md-3"> 
 		<label for="exampleInputEmail1">Example: Khulna</label>
 		<div class="input_box_search">
-  			<input type="text" name="district" class="input-medium " placeholder="District.." value="{{Request::old('district')}}"> 
+  			<input type="text" name="district" class="input-medium " id="car_metro"  placeholder="District.." value="{{Request::old('district')}}"> 
+  			<div id="areatatus" class="list_suggation"></div>
   		</div>
   		<span class="error_message">{{ $errors->first('district')}} </span>
 	</div>
@@ -35,7 +38,8 @@
 	<div class="col-md-3"> 
 		<label for="exampleInputEmail1">Example: HA</label>
 		<div class="input_box_search">
-  			<input type="text" class="input-medium " name="digits" placeholder="Character.." value="{{Request::old('digits')}}"> 
+  			<input type="text" class="input-medium " id="keyword" name="digits" placeholder="Character.." value="{{Request::old('digits')}}">
+  			<div id="keystatus"></div> 
   		</div>
   		<span class="error_message">{{ $errors->first('digits')}} </span>
 	</div>
@@ -63,7 +67,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="clear car_category_wrap">
 								<div class="category_icon">
-									<a href=""><img src="{{url('Frontend')}}/images/category/big-track.png"></a>
+									<a href=""><img src="{{url('public/Frontend')}}/images/category/big-track.png"></a>
 									<h6><a href="car_list.html">Big Truck</a></h6>
 								</div>
 							</div>
@@ -85,7 +89,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="clear car_category_wrap">
 								<div class="category_icon">
-									<a href=""><img src="{{url('Frontend')}}/images/category/vihicel.png"></a>
+									<a href=""><img src="{{url('public/Frontend')}}/images/category/vihicel.png"></a>
 									<h6><a href="car_list.html">Large Vehicle</a></h6>
 								</div>
 							</div>
@@ -107,7 +111,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="clear car_category_wrap">
 								<div class="category_icon">
-									<a href=""><img src="{{url('Frontend')}}/images/category/motorbiak.png"></a>
+									<a href=""><img src="{{url('public/Frontend')}}/images/category/motorbiak.png"></a>
 									<h6><a href="car_list.html">Motorbike</a></h6>
 								</div>
 							</div>
@@ -129,7 +133,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="clear car_category_wrap">
 								<div class="category_icon">
-									<a href=""><img src="{{url('Frontend')}}/images/category/private-car.png"></a>
+									<a href=""><img src="{{url('public/Frontend')}}/images/category/private-car.png"></a>
 									<h6><a href="car_list.html">Private Car</a></h6>
 								</div>
 							</div>

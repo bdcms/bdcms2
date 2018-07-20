@@ -91,7 +91,7 @@
 										</li>
 										<li>
 											<span><i class="fa fa-check"></i></span>
-											<a href="#">prime Minister web portal.</a>
+											<a href="{{URL::to('/Help')}}">Help</a>
 										</li>
 									</ul>
 								</div>
@@ -211,6 +211,7 @@
 		<script src="{{url('public/Frontend')}}/js/skill/jquery.inview.js"></script>   
 		<script src="{{url('public/Frontend')}}/js/skill/jquery.easy-pie-chart.js"></script>
 		<script src="{{url('public/Frontend')}}/js/skill/resume-custom.js"></script>  
+		<script src="{{URL::to('public/Backend/js/bootbox.js')}}"></script>
 
 		<script type="text/javascript">
 			$('#car_metro').keyup(function(){
@@ -257,6 +258,21 @@
 			});
 
 		</script>
+
+		 <script type="text/javascript">
+		    $(document).on("click", "#CaseSubmit", function(e){
+		        e.preventDefault();
+		        var link = $(this).attr("href");
+		        bootbox.confirm("Do you want to submit this case !!", function(confirmed){
+		          if(confirmed){
+		            window.location.href = "{{ url('/case_submit') }}";
+		          };
+		        });
+		    });
+		  </script>
+
+		  
+
 
 	</body>
 </html>
