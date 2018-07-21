@@ -80,6 +80,7 @@ class ProfileController extends Controller
         $data = DB::table('users') 
                 ->where('role_id',2) 
                 ->where('pub_status',1)
+                ->where('car_id','!=',NULL)
                 ->orderBy('id', 'DESC')
                 ->get();  
         $statement = view('admin/user_list')
