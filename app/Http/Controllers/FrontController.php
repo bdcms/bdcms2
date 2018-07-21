@@ -254,6 +254,12 @@ class FrontController extends Controller
 		]);
 
 		if($done){ 
+			//messageing system
+			// \Nexmo::message()->send([
+			//     'to'   => '8801969516500',
+			//     'from' => 'Nexmo',
+			//     'text' => 'Dear '.$request->name.', your registration is completed. Now you can wait for your owner added to you. Thank you'
+			// ]);
         	return redirect('/')->with('msg','Your application submited successfully. Please wait for approvement.');
     	}
        
