@@ -24,3 +24,11 @@
 		jQuery('.navigation nav').meanmenu();
 	});
 //End Menu JS Function Jikjak Theme
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+$(document).ready(function() {
+    $('#example2').DataTable();
+} );

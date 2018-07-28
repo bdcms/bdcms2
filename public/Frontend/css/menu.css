@@ -18,15 +18,15 @@ ul.sf-menu li a,
 ul.sf-menu li span {
 	display: block;
 	padding: 0 1em;
-	font: 12px/32px 'Cabin', sans-serif;
-	text-transform: uppercase;
+	font: 12px/32px 'PlayfairDisplay Bold';
+	 
 }
 
 ul.sf-menu > li > a,
 ul.sf-menu > li > span {
 	padding: 0 31px;
-	font: 14px/71px 'Arial'; 
-	color: #fff;
+	font: 16px/71px 'PlayfairDisplay Bold'; 
+	color: #000;
 	text-decoration: none;
 }
 

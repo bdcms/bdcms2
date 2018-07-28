@@ -57,16 +57,19 @@
 								<div class="search_out_content"><h5 style="color: red;"> 1200/= (12-may-18)<h5></div>
 							</div>
 						</div>
+
+						
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								 
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								@if(!empty(Session::get('user_id')))
 								<div class="search_out_content">
 									<h5><a href="single.html" data-toggle="modal" data-target="#myModal">Apply For Case</a> </h5>
 								</div>
-								<div class="search_out_content"><a href="single.html">For Details</a></div>
-								 
+								@endif
+								<div class="search_out_content"><a href="single.html">For Details</a></div> 
 							</div>
 						</div>
 

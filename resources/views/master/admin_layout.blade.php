@@ -1,3 +1,7 @@
+<?php 
+use App\Http\Controllers\ApplicationController;
+$data = ApplicationController::unapprove_application_count(Session::get('user_posting'));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -345,7 +349,8 @@
 			<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li> --}}
 			@if(Session::get('role_id')==1)
 			<li>
-				<a class="dropmenu" href="#"><i class="icon-file-alt"></i><span class="hidden-tablet"> Applications</span><span class="label label-important"> 3 </span></a>
+				<a class="dropmenu" href="#"><i class="icon-file-alt"></i><span class="hidden-tablet"> Applications</span>
+					@if($data>0)<span class="label label-important" style="margin-left: 5px;"> {{$data}}</span>@endif</a>
 				<ul>
 					<li><a class="submenu" href="{{URL::to('NewApplication')}}"><span class="hidden-tablet"> New Applications</span></a></li>
 					<li><a class="submenu" href="{{URL::to('Approved_Application')}}"><span class="hidden-tablet"> Registered Application</span></a></li> 

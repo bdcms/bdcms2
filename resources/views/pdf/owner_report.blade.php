@@ -58,16 +58,16 @@
 			                    ->first();
 			    ?>
 		        <tr> 
-		          <td>{{$value->user_name}}</td> 
-		          <td>{{$value->user_fname}}</td> 
-		          <td>{{$value->user_mobile}}</td> 
-		          <td>{{$value->user_email}}</td> 
-		          <td>{{$value->user_address}}</td> 
-		          <td>{{$value->user_birthday}}</td> 
-		          <td>{{$value->user_nid}}</td> 
-		          <td>{{$value->user_lisence}}</td>   
-		          <td>{{$car_info->car_reg_num}}</td>    
-		          <td>{{$car_info->user_name}}</td>    
+		          <td>@if(isset($value->user_name)){{$value->user_name}}@endif</td> 
+		          <td>@if(isset($value->user_fname)){{$value->user_fname}}@endif</td> 
+		          <td>@if(isset($value->user_mobile)){{$value->user_mobile}}@endif</td> 
+		          <td>@if(isset($value->user_email)){{$value->user_email}}@endif</td> 
+		          <td>@if(isset($value->user_address)){{$value->user_address}}@endif</td> 
+		          <td>@if(isset($value->user_birthday)){{$value->user_birthday}}@endif</td> 
+		          <td>@if(isset($value->user_nid)){{$value->user_nid}}@endif</td> 
+		          <td>@if(isset($value->user_lisence)){{$value->user_lisence}}@endif</td>   
+		          <td>@if(isset($car_info->user_name)){{$car_info->car_reg_num}}@endif</td>    
+		          <td>@if(isset($car_info->user_name)){{$car_info->user_name}}@endif</td>    
 		        </tr> 
 
 				@endforeach
@@ -103,23 +103,23 @@
 			        </tr>
 			      </thead>
 			      <tbody>
-					@foreach($driver as $value)
+					@foreach($driver as $drivers)
 					<?php   
 				        $car_info = DB::table('cars')
 				        			->join('users','cars.driver_id','=','users.id')
-				                    ->where('cars.id',$value->car_id)
+				                    ->where('cars.id',$drivers->car_id)
 				                    ->first();
 				    ?>
 			        <tr> 
-			          <td>{{$value->user_name}}</td> 
-			          <td>{{$value->user_fname}}</td> 
-			          <td>{{$value->user_mobile}}</td> 
-			          <td>{{$value->user_email}}</td> 
-			          <td>{{$value->user_address}}</td> 
-			          <td>{{$value->user_birthday}}</td> 
-			          <td>{{$value->user_nid}}</td> 
-			          <td>{{$value->user_lisence}}</td>   
-			          <td>{{$car_info->car_reg_num}}</td>    
+			          <td>@if(isset($drivers->user_name)){{$drivers->user_name}}@endif</td> 
+			          <td>@if(isset($drivers->user_fname)){{$drivers->user_fname}}@endif</td> 
+			          <td>@if(isset($drivers->user_mobile)){{$drivers->user_mobile}}@endif</td> 
+			          <td>@if(isset($drivers->user_email)){{$drivers->user_email}}@endif</td> 
+			          <td>@if(isset($drivers->user_address)){{$drivers->user_address}}@endif</td> 
+			          <td>@if(isset($drivers->user_birthday)){{$drivers->user_birthday}}@endif</td> 
+			          <td>@if(isset($drivers->user_nid)){{$drivers->user_nid}}@endif</td> 
+			          <td>@if(isset($drivers->user_lisence)){{$drivers->user_lisence}}@endif</td>   
+			          <td>@if(isset($car_info->car_reg_num)){{$car_info->car_reg_num}}@endif</td>    
 			        </tr> 
 
 					@endforeach

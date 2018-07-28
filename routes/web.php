@@ -75,3 +75,4 @@ Route::get('/User_Logout',		'LoginController@User_Logout');
 //Case Related Routing
 Route::get('/WithDrawCase',		'CaseController@WithDrawCase');
 Route::get('/PendingCase',		'CaseController@PendingCase');
+Route::get('/Case_Single/{id}', 'CaseController@case_single');

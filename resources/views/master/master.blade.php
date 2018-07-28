@@ -8,9 +8,10 @@
 		<link href="{{url('public/Frontend')}}/css/menu.css" rel="stylesheet">
 		<link href="{{url('public/Frontend')}}/css/superfish.css" rel="stylesheet">
 		<link href="{{url('public/Frontend')}}/css/meanmenu.css" rel="stylesheet">
+		<link href="{{url('public/Frontend')}}/css/datatables.css" rel="stylesheet"> 
+		<link href="{{url('public/Frontend')}}/css/datatables.min.css" rel="stylesheet"> 
+		<link href="{{url('public/Frontend')}}/css/color.css" rel="stylesheet"> 
 		<link href="{{url('public/Frontend')}}/css/style.css" rel="stylesheet">
-		<link href="{{url('public/Frontend')}}/css/color.css" rel="stylesheet">
-		
 	<!-- font awesome this template -->
 		<link href="{{url('public/Frontend')}}/fonts/css/font-awesome.css" rel="stylesheet">
 		<link href="{{url('public/Frontend')}}/fonts/css/font-awesome.min.css" rel="stylesheet">
@@ -19,8 +20,8 @@
 	</head>
 	<body>
 	<!-- --------------------------------Menu Section Start--------------------------------- -->
-	<section>  
-		<div class="navigation"> 
+ <section>
+ 	<div class="navigation"> 
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-2">
@@ -42,7 +43,7 @@
 				</div>	
 			</div>
 		</div>
-	</section>
+ </section>
 	
 
 
@@ -203,7 +204,9 @@
 		
 		
 		<script src="{{url('public/Frontend')}}/js/jquery.js"></script>
-		<script src="{{url('public/Frontend')}}/js/bootstrap.min.js"></script>
+		<script src="{{url('public/Frontend')}}/js/bootstrap.min.js"></script> 
+		<script src="{{url('public/Frontend')}}/js/jquery.dataTables.min.js"></script> 
+		<script src="{{url('public/Frontend')}}/js/dataTables.bootstrap.min.js"></script>  
 		<script src="{{url('public/Frontend')}}/js/jquery-ui.min.js" type="text/javascript"></script>
 		<script src="{{url('public/Frontend')}}/js/custom.js" type="text/javascript"></script>
 		<script src="{{url('public/Frontend')}}/js/superfish.js" type="text/javascript"></script>
@@ -213,6 +216,7 @@
 		<script src="{{url('public/Frontend')}}/js/skill/resume-custom.js"></script>  
 		<script src="{{URL::to('public/Backend/js/bootbox.js')}}"></script>
 
+	 
 		<script type="text/javascript">
 			$('#car_metro').keyup(function(){
 				//console.log('check');

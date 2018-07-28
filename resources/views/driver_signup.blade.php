@@ -17,11 +17,11 @@
 								<p>Personal Information</p>
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
-								    <label class="control-label"><span class="text-danger">*</span> Name:</label>
+								    <label class="control-label"><span class="text-danger">*</span> Full Name:</label>
 								    </div>
 								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="text" name="name"  placeholder="Name" value="{{old('name')}}" class="
+								    	<input type="text" name="name"  placeholder="Full Name" value="{{old('name')}}" class="
 								    	@if($errors->first('name')) field_error @endif">  
 								    	<span class="err-msg text-danger">{{$errors->first('name')}}</span>
 								    </div>
@@ -29,11 +29,11 @@
 								</div>
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
-								    <label class="control-label"><span class="text-danger">*</span> F-Name:</label>
+								    <label class="control-label"><span class="text-danger">*</span> Father Name:</label>
 								    </div>
 								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="text" name="fname"  placeholder="F-Name" value="{{old('fname')}}" class="
+								    	<input type="text" name="fname"  placeholder="Father Name" value="{{old('fname')}}" class="
 								    	@if($errors->first('fname')) field_error @endif">
 								    	<span class="err-msg text-danger">{{$errors->first('fname')}}</span>
 								    </div>
@@ -198,7 +198,57 @@
 						
 					</div>
 				</div>
-				@include('master.inc.sidebar')
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="custom_row float_width">
+						<div class="section_heading section_content">
+							<h6>Guidelines for Complete Registration </h6>
+						</div>
+						<div class="section_content">
+							<ul>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Registration would be complete within 3 steps.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>profile will be active less than 7days.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>This first step only insert your personal information.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Second step your Car & Driver information.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Third step all of document upload.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Be saved your password for login profile next time.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Type your actual name which are provide NID.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Care fully insert Car Sasis NO, Enginee No. </p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Care fully insert Car Sasis NO, Enginee No.</p>
+								</li>
+								<li>
+									<span><i class="fa fa-circle"></i></span>
+									<p>Use contact number or email for profile login.</p>
+								</li>
+							</ul> 	 	
+						</div> 
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
