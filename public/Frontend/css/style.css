@@ -101,14 +101,14 @@ hr{float: left;width: 100%;border:1px solid #0083e926;}
  p
  {
     color:#656565; 
-    font-size:13px;
+    font-size:14px;
     line-height:21px;
-    font-family:'PlayfairDisplay Bold';
+    font-family:'PlayfairDisplay';
 }
  a{
-    font-size: 12px; 
+    font-size: 14px; 
     line-height:18px; 
-    font-family:'PlayfairDisplay Bold';
+    font-family:'PlayfairDisplay';
     color:#303030;
  }
  a:hover, a:focus{color:#0083e9;}
@@ -560,7 +560,7 @@ width: 200px;
     float: left;
     width: 100%;
  }
- .input_box_search input[type='text']{
+ .input_box_search input[type='text'],.input_box_search input[type='number']{
     float: left;
     width: 100%; 
     height: 50px;
@@ -713,8 +713,10 @@ width: 200px;
  .w3-address-grid:hover .w3-address-left, .w3-address-grid:hover .w3-address-right span{color: #0083e9;transition: all 200ms ease-in; -webkit-transition: all 200ms ease-in; -o-transition: all 200ms ease-in; -moz-transition: all 200ms ease-in;} 
  .w3-address-grid:hover .w3-address-right p{color: #fff;transition: all 200ms ease-in; -webkit-transition: all 200ms ease-in; -o-transition: all 200ms ease-in; -moz-transition: all 200ms ease-in;}
   .copy_right {float: left;width: 100%;}
-  .copy_right p{color: #fff;padding-top: 10px;}
-  .copy_right p a{color: #0083e9;}
+  .copy_right p{color: #fff;padding-top: 10px;font-size: 10px;
+    font-family: PlayfairDisplay;}
+  .copy_right p a{color: #0083e9;font-size: 10px;
+    font-family: PlayfairDisplay;}
   .footer_content_wrap{margin-top: 100px;}
   .footer_content input[type='text'], .footer_content input[type='email'], .footer_content textarea {
     border-radius: 0px;
@@ -958,7 +960,8 @@ width: 200px;
     border:1px solid #0083e9;
     color: #fff;
 }
-.login_wrap .login_div span{font-size: 12px;}
+.login_div  .login_model_label label{color: #fff;}
+.login_wrap .login_div span{font-size: 12px;color: $fff;}
 .login_wrap h6{color: #fff;font-weight: bold;font-family: arial; font-size: 14px;}
   /* ***************************"Login page style Exit ******************************************/
   /* ***************************"Search Out page style Start ******************************************/
@@ -1099,6 +1102,7 @@ width: 200px;
 }
 .registrtion_sec a:hover{
     background: #03599c; 
+    color: #fff;
     transition: all 200ms ease-in; -webkit-transition: all 200ms ease-in; -o-transition: all 200ms ease-in; -moz-transition: all 200ms ease-in;
 }
 
@@ -1116,6 +1120,7 @@ width: 200px;
 .home_data_table_bg{
     background: #2C3E50;
     padding: 100px;
+    padding-bottom: 30px;
 
 }
 .tata_table_carinfo{
@@ -1141,11 +1146,114 @@ padding: 10px 0px;
 border-color: #428bca;}
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover{background: none !important; border:0px;}
 .dataTables_wrapper .dataTables_paginate .paginate_button{background: none !important; border:0px;}
-.car_number_search label{color: #fff;}
+.car_number_search label{color: #0083e9;}
+.car_number_search label span{color: #fff;}
 .control-group label{font-size: 12px;}
 .easyPieChart span{color: #fff;font-size: 18px;}
 .our-capabilities p{color: #fff;font-size: 12px;}
-/*----------------------------------------*/
+
+
+
+.notice_section{
+    background: #DADADA;
+}
+.notice_wrap,.notice_wrap .notice_heading,.notice_wrap .notice_body,.notice_wrap .notice_body ul li{float: left;width: 100%;overflow: hidden;}
+.notice_wrap .notice_heading{}
+.notice_wrap .notice_body ul{text-align: left;}
+.notice_wrap .notice_body ul li{line-height: 23px;}
+.notice_wrap .notice_body ul li .fa{padding-right: 10px;color:#428bca; }
+
+ 
+
+ .key_person_wrap {
+    position: relative; 
+    float: left;
+    width: 100%;
+    background: #fff;
+    height: 100%;
+}
+.imageoverlay a{color:#fff;width: 100%;float: left;margin-top: 85%;font-size: 16px;}
+.imageoverlay span{color:#fff;width: 100%;float: left;}
+ .image {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    height: 100%;
+   /* position: absolute;*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.image img{width: 100%;}
+ .imageoverlay {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    background: #00000080; 
+    cursor: pointer;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    opacity:1;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.key_person_wrap:hover .imageoverlay {
+    top: 0;
+}
+ 
+.imageoverlay i {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    transform: translate3d(-50%,-50%,0);
+}
+ 
+.thumbnail_pic:after {
+    margin-left: 0px;
+    margin-top: 0%;
+    content: "";
+    height: 4px;
+    width: 100%;
+    float: left;
+    opacity: 1;
+    background: #428bca;
+    box-shadow: 0px 0px 0px #428bca;
+}
+.thumbnail_pic:before {
+    margin-left: 0px;
+    margin-top: 0%;
+    content: "";
+    height: 4px;
+    width: 100%;
+    float: left;
+    opacity: 1;
+    background: #428bca;
+    box-shadow: 0px 0px 0px #428bca;
+}
+
+.login_model_footer{float: left;width: 100%;text-align: center;}
+.login_model_label{margin-bottom: 10px;border:0px;-webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+     box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075); 
+     -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; 
+     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; 
+     background: transparent;
+ }
+ .signin_model{margin-top: 10%;}
+.login_model_label label{padding-left: 5px;padding-right: 20px;color: #fff !important;}
+.signin_model .modal-content{background: #79797917;}
+.signin_model .modal-header,.signin_model .modal-footer{border:0px;}
+.signin_model .modal-header span{font-size: 28px;color: #fff;}
+/*----------------------------------------*/ 
+
 
 /*-----------------------------------------*/
 

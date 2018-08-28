@@ -36,7 +36,7 @@
 								<li><a href="about.html">About</a></li>   
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="contact.html">Contact Us</a></li>
-								<li><a href="{{URL::to('/login')}}">Login</a></li>
+								<li><a  data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -45,7 +45,52 @@
 		</div>
  </section>
 	
+ 
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="background: url(http://localhost/BDCMS/public/Frontend/images/slider/asd.jpg) no-repeat 0px 0px;background-size: cover;background-attachment: fixed;">
+  <div class="modal-dialog signin_model" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{-- <h4 class="modal-title" id="myModalLabel">Login</h4> --}} 
+      </div>
+      <div class="modal-body">
+        <div class="login_wrap" style="min-height: 0px; margin-top: 0px;"> 
+				<div class="login_div" style="background:none;">
+				<div class="imag_login"><img src="{{url('public/Frontend/')}}/images/profile_img.jpg"></div>
+					<form class="form-inline" method="post" action="{{url('User_Login')}}">
+						{{csrf_field()}} 
+						<div class="form-control login_model_label"> 
+							<input type="radio"  name="user_role" value="2"> <label>Woner</label>
+
+							<input type="radio" name="user_role" value="3"><label>Driver</label>
+
+							<input type="radio" name="user_role" value="6"><label>Police Sergeant</label>
+							<span class="error_message">{{ $errors->first('user_role')}} </span>
+						</div>
+						<br>
+					  	<input type="text" class="input-small" name = "email" placeholder="Email" value="{{Request::old('email')}}">
+					  	<span class="error_message">{{ $errors->first('email')}} </span>
+
+					  	<input type="password" class="input-small" name="password" placeholder="Password" value="{{Request::old('password')}}">
+					  	<span class="error_message">{{ $errors->first('password')}} </span>
+
+					    <label>
+					      <input type="checkbox"> <span> Remember me</span>
+					    </label>
+					 
+					  	<button type="submit" class="btn sign_in_btn">Sign in</button>
+					</form>
+					<p><a href="{{URL::to('/ownerinfo')}}">Forget Password</a> <a href="{{URL::to('/ownerinfo')}}">Sign Up</a></p>
+				</div>				
+			</div>
+      </div>
+      <div class="modal-footer login_model_footer"> 
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -74,10 +119,7 @@
 											<span><i class="fa fa-check"></i></span>
 											<a href="bdcms_contact.html">BDCMS office information.</a>
 										</li>
-										<li>
-											<span><i class="fa fa-check"></i></span>
-											<a href="{{URL::to('/driverSignup')}}">Driver sign up</a>
-										</li>
+										
 										<li>
 											<span><i class="fa fa-check"></i></span>
 											<a href="#">Bd Jobs.com.</a>
@@ -101,25 +143,16 @@
 						<div class="col-sm-3 col-gm-3 col-cm-3">
 							<div class="footer_content_wrap">
 								<div class="footer_contentf_heading">
-									<h5>Update Blog</h5>
+									<h5>Menu</h5>
 								</div>
 								<div class="footer_content">
 									<ul>
 				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/artis2.JPG" alt="image">  <a href="#">NWU will remain closed on Tuesday, 15 May,   City Corporation Election.</a></p>
-				                      </li>
-				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/WC21024.jpg" alt="image">  <a href="#">  NWU will remain closed on 17.03.2018.   17.03.2018.</a></p>
-				                      </li>
-				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/GE0561.jpg" alt="image">  <a href="#">Committee of Pahela Baishakh 1425</a></p>
-				                      </li>
-				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/images (2).jpg" alt="image">  <a href="#">Independence and National Day   Bangladesh.</a></p>
-				                      </li>
-				                      <li>
-				                        <p> <img src="{{url('public/Frontend')}}/images/lged_1.gif" alt="image">  <a href="#">NWU will remain closed on Tuesday, 15 May,   Election.</a></p>
-				                      </li>
+				                        <a href="{{url::to('/login')}}">Upazila/Zilla Login</a>
+				                      </li> 
+				                      <li> 
+											<a href="{{URL::to('/driverSignup')}}">Driver sign up</a>
+										</li>
 				                    </ul>
 								</div>
 							</div>

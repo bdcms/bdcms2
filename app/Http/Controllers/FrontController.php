@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Existing;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
+use DB;
 class FrontController extends Controller
 {
 	public $user_email = ' ';
@@ -69,7 +69,8 @@ class FrontController extends Controller
     		return view('signup1'); 
 	//	}
     }
-	public function appfrom2(Request $request){  
+	public function appfrom2(Request $request){ 
+
     	$this->validate($request,[
 	            'carname_id'		=> 'required', 
 	            'car_wheel'			=> 'required', 
@@ -83,7 +84,7 @@ class FrontController extends Controller
 	            'car_reg_date'		=> 'required|date',
 	            'user_mobile'		=> ['required',
 	            							Rule::exists('users')->where(function ($query) {
-    											$query->where('role_id', 3)->where('car_id', 0);
+    											$query->where('role_id', 3)->where('car_id', NULL);
 											}),
 										],
 	        ]);
@@ -122,6 +123,7 @@ class FrontController extends Controller
     }
  
 	public function appfrom3(Request $request){  
+		
     	$this->validate($request,[
 		           'image'				=> 'required|mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/svg|max:250', 
 		           'document_pdf'		=> 'required|max:2000',
@@ -217,7 +219,7 @@ class FrontController extends Controller
             'fname'			=> 'required', 
             'nid'			=> 'required|numeric', 
             'contact_no'	=> 'required|numeric',
-            'email'			=> 'required|email|unique:users,user_email',
+            'email'			=> 'required|email|unique:bdc_drivers,dri_email',
             'password' 		=> 'required|min:6|confirmed',
 			'password_confirmation' => 'required|min:6',  
 			'licence'		=> 'required',
@@ -236,23 +238,23 @@ class FrontController extends Controller
 		}else{
 			$user_profile_pic = url('Frontend/images/driver/default_driver.png'); 
 		}	 
-		$done = \DB::table('users')->insert([
-			'user_name'			=> $request->name,
-	    	'user_fname'		=> $request->fname,
-	    	'user_profile_pic'	=> $user_profile_pic,
-	    	'user_email'		=> $request->email, 
-	    	'user_password'		=> md5($request->password), 
-	    	'user_mobile'		=> $request->contact_no,  
-	    	'user_address'		=> $request->address, 
-	    	'user_birthday'		=> $request->dateofbirth, 
-	    	'user_gender'		=> $request->gender,  
-	    	'user_passport'		=> $request->passport, 
-	    	'user_lisence'		=> $request->licence, 
-	    	'user_nid'			=> $request->nid, 
-	    	'role_id'			=>  3,//driver role id
-	    	'remember_token'	=> str_random(25)
-		]);
-
+		$done( 
+			// 'dri_name'			= $request->name,
+	  //   	'dri_fname'			= $request->fname,
+	  //   	'dri_profile_pic'	= $user_profile_pic,
+	  //   	'dri_email'			= $request->email, 
+	  //   	'dri_password'		= md5($request->password), 
+	  //   	'dri_mobile'		= $request->contact_no,  
+	  //   	'dri_address'		= $request->address, 
+	  //   	'dri_birthday'		= $request->dateofbirth, 
+	  //   	'dri_gender'		= $request->gender,  
+	  //   	'dri_passport'		= $request->passport, 
+	  //   	'dri_lisence'		= $request->licence, 
+	  //   	'dri_nid'			= $request->nid,  
+	  //   	'dri_joining_date'	= date('M,d,Y'),  
+	  //   	'remember_token'	= str_random(25)
+		);
+		$done = DB::table('bdc_drivers')->insert($done);
 		if($done){ 
 			//messageing system
 			// \Nexmo::message()->send([
@@ -287,8 +289,94 @@ class FrontController extends Controller
 
 
 
+//All of Ajax REQUEST METHOD
 
-//ajax request
+    public function check_user_login(){
+    	$email_id = $_GET['email'];
+		$result = Existing::check_login_email($email_id);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+    }
+
+	public function check_mer_email(){
+		$email_id = $_GET['email_id'];
+		$result = Existing::check_mer_email($email_id);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	}
+	public function check_nid_no(){
+		$nid_no = $_GET['nid_no'];
+		$result = Existing::check_user_nid($nid_no);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	}
+
+	public function check_car_umber(){
+		$car_metro 	= $_GET['car_metro'];
+		$keyword 	= $_GET['keyword'];
+		$car_number = $_GET['car_number']; 
+		$first     = substr($car_number, 0, 2);
+    	$last      = substr($car_number, 2, 5);  
+        $number    = $car_metro." ".$keyword." ".$first."-".$last;  
+		$result = Existing::check_carnumber_check( $number);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	} 
+	 
+
+	public function check_chassis_no(){
+		$chassis_no 	= $_GET['chassis_no'];
+		$result = Existing::check_car_chassis_check( $chassis_no);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	}
+
+	public function check_engine_no(){
+		$engine_no 	= $_GET['engine_no'];
+		$result = Existing::check_engine_no_check( $engine_no);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	}
+
+	public function check_insurence_no(){
+		$insurence_no 	= $_GET['insurence_no'];
+		$result = Existing::check_insurence_no_check( $insurence_no);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	}
+
+	public function check_licence_no(){
+		$licence_no 	= $_GET['licence_no'];
+		$result = Existing::check_licence_no_check( $licence_no);
+		if($result!=0){
+			echo '1'; //already exists
+		}else{
+			echo '0';
+		}
+	}
+
+
     public function district(Request $request){
 
     	$district = \DB::table('tbl_car_reg')

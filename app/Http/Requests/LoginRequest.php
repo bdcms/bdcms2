@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         $rules = [ 
-            'email'=>        'required|exists:users,user_email|email',
+            'email'=>        'required',
             'password'=>        'required|min:6'
         ];
         return $rules;
@@ -32,9 +32,8 @@ class LoginRequest extends FormRequest
 
     public function messages(){
        return [ 
-        'email.required' =>'Please insert login email.',
-        'email.exists'   =>'Email address not found.',
-        'password.size'      =>'Password min 6 digits.'
+        'email.required' =>'Please insert login email.', 
+        'password.size'  =>'Password min 6 digits.'
          
        ]; 
     }

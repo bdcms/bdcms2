@@ -22,6 +22,10 @@ Route::get('/cardocument',		'FrontController@signup2');
 Route::get('/login',			'FrontController@login');
 Route::get('/driverSignup',		'FrontController@driverSignup');
 
+
+//Admin Login
+Route::get('/admin',					'BackendController@admin_login');
+
 //PDF
 Route::get('/makePDF',			'PdfController@makePDF');
 Route::post('/Print_Report',	'PdfController@Print_Report');
@@ -36,6 +40,7 @@ Route::post('/checkLogin/',		'FrontController@checkLogin');
 Route::post('/driSingup/',		'FrontController@driSingup'); 
 Route::any('/area_search/',		'FrontController@district');
 Route::any('/key_search/',		'FrontController@keyword');
+
 
 Route::get('/hello',			'FrontController@xxx');
 
@@ -76,3 +81,13 @@ Route::get('/User_Logout',		'LoginController@User_Logout');
 Route::get('/WithDrawCase',		'CaseController@WithDrawCase');
 Route::get('/PendingCase',		'CaseController@PendingCase');
 Route::get('/Case_Single/{id}', 'CaseController@case_single');
+
+//Ajax all URL ROUTING 
+Route::get('check_mer_email',   'FrontController@check_mer_email');
+Route::get('check_nid_no',      'FrontController@check_nid_no');
+Route::get('check_car_umber',   'FrontController@check_car_umber'); 
+Route::get('check_chassis_no',  'FrontController@check_chassis_no');
+Route::get('check_engine_no',   'FrontController@check_engine_no');
+Route::get('check_insurence_no','FrontController@check_insurence_no');
+Route::get('check_licence_no',  'FrontController@check_licence_no');
+Route::get('check_user_login',  'LoginController@check_user_login'); 

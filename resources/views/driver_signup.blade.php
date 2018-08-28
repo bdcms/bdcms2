@@ -45,12 +45,14 @@
 								    </div>
 								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="number" name="nid"  placeholder="Nid number" value="{{old('nid')}}" class="
-								    	@if($errors->first('nid')) field_error @endif">
+								    	<input type="number" name="nid" id="nid_no" placeholder="Nid number" value="{{old('nid')}}" class="
+								    	@if($errors->first('nid')) field_error @endif" onchange="check_nid();">
 								    	<span class="err-msg text-danger">{{$errors->first('nid')}}</span>
+								    	<div id="nid_no_error_msg"  style="color:#F00;font-weight:800"> </div>
 								    </div>
 									</div>
 								</div>
+
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
 								    <label class="control-label"><span class="text-danger">*</span> Contact No:</label>
@@ -69,9 +71,10 @@
 								    </div>
 								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="email" name="email"  placeholder="Email" value="{{old('email')}}" class="
-								    	@if($errors->first('email')) field_error @endif">
+								    	<input type="email" name="email" id="email_id"  placeholder="Email" value="{{old('email')}}" class="
+								    	@if($errors->first('email')) field_error @endif" onchange="check_email();">
 								    	<span class="err-msg text-danger">{{$errors->first('email')}}</span>
+								    	<div id="email_id_error_msg"  style="color:#F00;font-weight:800"> </div>
 								    </div>
 									</div>
 								</div>
@@ -115,9 +118,10 @@
 								    </div>
 								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="text" name="licence"  placeholder="Passport number" value="{{old('licence')}}" class="
-								    	@if($errors->first('licence')) field_error @endif">
+								    	<input type="text" name="licence" id="licence_no" placeholder="Licence number" value="{{old('licence')}}" class="
+								    	@if($errors->first('licence')) field_error @endif" onchange="check_licence();">
 								    	<span class="err-msg text-danger">{{$errors->first('licence')}}</span>
+								    	<div id="licence_no_error_msg"  style="color:#F00;font-weight:800"> </div>
 								    </div>
 									</div>
 								</div> 
@@ -127,7 +131,7 @@
 								    </div>
 								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="text" name="address"  placeholder="Passport number" value="{{old('address')}}" class="
+								    	<input type="text" name="address"  placeholder="Address" value="{{old('address')}}" class="
 								    	@if($errors->first('address')) field_error @endif">
 								    	<span class="err-msg text-danger">{{$errors->first('address')}}</span>
 								    </div>
@@ -252,5 +256,83 @@
 			</div>
 		</div>
 	</section>
+
+<script>
+function check_email(){ 
+	var email_id = $('#email_id').val();
+	var email_id 	= $.trim(email_id); 
+	$.ajax({
+		type: 'get',
+		data: 'email_id='+email_id,
+		url: '<?php echo url('check_mer_email'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#email_id").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#email_id_error_msg').html("This Email Id Already Exist.");	
+				$("#email_id").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#email_id").css('border', '');
+				$('#email_id_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+function check_nid(){ 
+	var nid_no = $('#nid_no').val();
+	var nid_no 	= $.trim(nid_no); 
+	
+	$.ajax({
+		type: 'get',
+		data: 'nid_no='+nid_no,
+		url: '<?php echo url('check_nid_no'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#nid_no").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#nid_no_error_msg').html("National ID Already Exist.");	
+				$("#nid_no").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#nid_no").css('border', '');
+				$('#nid_no_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+
+function check_licence(){ 
+	var licence_no = $('#licence_no').val();
+	var licence_no 	= $.trim(licence_no); 
+	
+	$.ajax({
+		type: 'get',
+		data: 'licence_no='+licence_no,
+		url: '<?php echo url('check_licence_no'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#licence_no").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#licence_no_error_msg').html("Licence Number Already Exist.");	
+				$("#licence_no").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#licence_no").css('border', '');
+				$('#licence_no_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+</script>
 	<!-- --------------------------------Welcome Section Exit--------------------------------- -->
 @endsection

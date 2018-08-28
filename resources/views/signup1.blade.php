@@ -4,7 +4,7 @@
 	<section class="section_class">
 		<div class="container">
 			<div class="row"> 
-				<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12"> 
+				<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12"> 
 					
 					<div class="float_width">
 						<div class="section_heading section_content">
@@ -58,25 +58,27 @@
 								</div> 
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
-								    	<label class="control-label"><span class="text-danger">*</span> Car Chasis No:</label>
+								    	<label class="control-label"><span class="text-danger">*</span> Car Chassis No:</label>
 									</div>
 									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 									    <div class="controls">
-									    	<input type="text" name="car_chasis"  placeholder="Car Sasis number" value="{{old('car_chasis')}}" class="
-								    	@if($errors->first('car_chasis')) field_error @endif">
+									    	<input type="text" name="car_chasis" id="chassis_no" placeholder="Car Sasis number" value="{{old('car_chasis')}}" class="
+								    	@if($errors->first('car_chasis')) field_error @endif" onchange="chassis_check();">
 									    	<span class="err-msg text-danger">{{$errors->first('car_chasis')}}</span>
+									    	<div id="chassis_no_error_msg"  style="color:#F00;font-weight:800"> </div>
 									    </div>
 									</div>
 								</div>
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
-								    <label class="control-label"><span class="text-danger">*</span> Engineen No:</label>
+								    <label class="control-label"><span class="text-danger">*</span> Engine No:</label>
 									</div>
 									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="text" name="car_engine_num"  placeholder="car Engineen number" value="{{old('car_engine_num')}}" class="
-								    	@if($errors->first('car_engine_num')) field_error @endif">
+								    	<input type="text" name="car_engine_num" id="engine_no"  placeholder="car Engineen number" value="{{old('car_engine_num')}}" class="
+								    	@if($errors->first('car_engine_num')) field_error @endif" onchange="engine_check();">
 								    	<span class="err-msg text-danger">{{$errors->first('car_engine_num')}}</span>
+								    	<div id="engine_no_error_msg"  style="color:#F00;font-weight:800"> </div>
 								    </div>
 									</div>
 								</div>
@@ -95,17 +97,18 @@
 										    </div>
 										    <div class="col-md-4 col-lg-4 col-sm-4 col-xsm-12"> 
 									    		<input type="text" name="car_key" id="keyword" placeholder="Charrecter" value="{{old('car_key')}}" class="
-								    	@if($errors->first('car_key')) field_error @endif">
+								    	@if($errors->first('car_key')) field_error @endif" >
 									    		<span class="err-msg text-danger">{{$errors->first('car_key')}}</span>
 									    		<div id="keystatus"></div>
 										    	 
 										    </div>
 										    <div class="col-md-4 col-lg-4 col-sm-4 col-xsm-12" style="padding-right: 0px;">  
-									    		<input type="text" name="car_num"  placeholder="Number" value="{{old('car_num')}}" class="
-								    	@if($errors->first('car_num')) field_error @endif">
+									    		<input type="text" name="car_num" id="car_number"  placeholder="Number" value="{{old('car_num')}}" class="
+								    	@if($errors->first('car_num')) field_error @endif" onchange="check_car_umber();">
 									    		<span class="err-msg text-danger">{{$errors->first('car_num')}}</span> 
 
 										    </div>
+										    <div id="car_metro_error_msg"  style="color:#F00;font-weight:800"> </div>
 									    </div>
 									</div>
 								</div> 
@@ -148,9 +151,10 @@
 									</div>
 									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="text" name="car_insurence"  placeholder="Insurence number" value="{{old('car_insurence')}}" class="
-								    	@if($errors->first('car_insurence')) field_error @endif">
+								    	<input type="text" name="car_insurence" id="insurence_no" placeholder="Insurence number" value="{{old('car_insurence')}}" class="
+								    	@if($errors->first('car_insurence')) field_error @endif" onchange="check_insurece();">
 								    	<span class="err-msg text-danger">{{$errors->first('car_insurence')}}</span>
+								    	<div id="insurence_no_error_msg"  style="color:#F00;font-weight:800"> </div>
 								    </div>
 								</div>
 								</div>
@@ -206,7 +210,7 @@
 					</div>
 				</div>
 				
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xsm-12">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xsm-12">
 					 
 					<div class="custom_row float_width">
 						<div class="section_heading section_content">
@@ -262,4 +266,112 @@
 			</div>
 		</div>
 	</section>
+
+<script>
+
+function check_car_umber(){ 
+	var car_metro  	= $('#car_metro').val();
+	var keyword	   	= $('#keyword').val();
+	var car_number 	= $('#car_number').val();
+	var car_metro 	= $.trim(car_metro);
+	var keyword 	= $.trim(keyword);
+	var car_number 	= $.trim(car_number); 
+	var passnewpwd = 'car_metro='+car_metro+'&keyword='+keyword+'&car_number='+car_number;
+	$.ajax({
+		type: 'get',
+		data: 'car_metro='+car_metro+'&keyword='+keyword+'&car_number='+car_number,
+		url: '<?php echo url('check_car_umber'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#car_number").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#car_metro_error_msg').html("This Car Number Already Exists.");	
+				$("#car_number").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#car_metro").css('border', '');
+				$('#car_metro_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+function chassis_check(){ 
+	var chassis_no = $('#chassis_no').val();
+	var chassis_no = $.trim(chassis_no);
+	$.ajax({
+		type: 'get',
+		data: 'chassis_no='+chassis_no,
+		url: '<?php echo url('check_chassis_no'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#chassis_no").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#chassis_no_error_msg').html("Chassis Number Already Exist.");	
+				$("#chassis_no").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#chassis_no").css('border', '');
+				$('#chassis_no_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+function engine_check(){ 
+	var engine_ = $('#engine_no').val();
+	var engine_no = $.trim(engine_);
+	$.ajax({
+		type: 'get',
+		data: 'engine_no='+engine_no,
+		url: '<?php echo url('check_engine_no'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#engine_no").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#engine_no_error_msg').html("Engine Number Already Exist.");	
+				$("#engine_no").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#engine_no").css('border', '');
+				$('#engine_no_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+function check_insurece(){ 
+	var insurence_no = $('#insurence_no').val();
+	var insurence_no = $.trim(insurence_no);
+	$.ajax({
+		type: 'get',
+		data: 'insurence_no='+insurence_no,
+		url: '<?php echo url('check_insurence_no'); ?>',
+		success: function(responseText){  
+			if(responseText==1){  //already exist
+				//alert("This Email Id Already Exist");
+				$("#exist").val("1"); //already exist
+				$("#insurence_no").css('box-shadow', '2px 0px 0px 0px red'); 
+				$('#insurence_no_error_msg').html("Insurence Number Already Exist.");	
+				$("#insurence_no").focus();
+				return false;				   
+			}else if(responseText==0){
+			    $("#exist").val("0");
+				$("#insurence_no").css('border', '');
+				$('#insurence_no_error_msg').html("");	
+			}
+		}		
+	});	
+}
+
+ 
+
+</script>
+
 	@endsection

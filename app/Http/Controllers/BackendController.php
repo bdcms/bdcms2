@@ -13,7 +13,7 @@ session_start();
 class BackendController extends Controller
 {
     //
-    public function index(){ 
+    public function index(){  
     	$id=Session::get('user_id');
     	$role_id=Session::get('role_id');
     	if(empty($id)==true and empty($role_id)==true){
@@ -22,6 +22,10 @@ class BackendController extends Controller
     	return view('admin/index');
     	}
     }
+
+     public function admin_login(){
+        return view('admin.admin_login');
+     }
 
     
 }

@@ -6,17 +6,17 @@
 	<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
 		<div class="row">
 			<div class="login_wrap"> 
+				<h5 style="margin-bottom:30px;">BDCMS Admin Login</h5>
 				<div class="login_div">
+
 				<div class="imag_login"><img src="{{url('public/Frontend/')}}/images/profile_img.jpg"></div>
 					<form class="form-inline" method="post" action="{{url('User_Login')}}">
 						{{csrf_field()}} 
 						<div class="form-control login_model_label">  
 							
+							 
 							<label class="radio-inline">
-							  <input type="radio" name="user_role" id="user_role" value="4" > Zilla Admin
-							</label>
-							<label class="radio-inline">
-							  <input type="radio" name="user_role" id="user_role" value="5"> Upazila Admin
+							  <input type="hidden" name="user_role" id="user_role" value="1">  
 							</label>
 						</div>
 					  	<input type="text" class="input-small" name = "email" id="email" placeholder="Email" value="{{Request::old('email')}}" >

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB; 
 use Session;
 use Redirect;
-session_start();
+// session_start();
 class ApplicationController extends Controller
 {
     //

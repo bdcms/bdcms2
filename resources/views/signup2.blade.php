@@ -3,7 +3,7 @@
 	<section class="section_class">
 		<div class="container">
 			<div class="row"> 
-				<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12"> 
+				<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12"> 
 					 
 					<div class="clear">
 						<div class="section_heading section_content">
@@ -60,7 +60,7 @@
 						
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xsm-12">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xsm-12">
 					 
 					<div class="custom_row float_width">
 						<div class="section_heading section_content">
