@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB; 
 use Session;
 use Redirect;
+use App\SelectModel;
 // session_start();
 class ApplicationController extends Controller
 {
@@ -14,16 +15,8 @@ class ApplicationController extends Controller
     
 
     public function NewApplication(){
-        $xxx=Session::get('user_posting'); 
-    	$data = DB::table('cars')
-    			->join('carnames','cars.carname_id','=','carnames.id') 
-    			->join('users','cars.owner_id','=','users.id')
-    			->select('carnames.car_name','users.*','cars.*')
-                ->where('cars.car_status',0) 
-                ->where('cars.car_metro',"$xxx")
-    			->orderBy('cars.id', 'DESC')
-    			->get(); 
-
+        $area=Session::get('user_posting');  
+    	$data = SelectModel::NewApplication($area);   
     	$statement = view('admin/NewApplication')
     		->with('allinfo',$data); 
     	return view('master.admin_layout')
@@ -31,13 +24,7 @@ class ApplicationController extends Controller
     }
 
     public function Approved_Application(){ 
-    	$data = DB::table('cars')
-    			->join('users','cars.owner_id','=','users.id')
-    			->join('carnames','cars.carname_id','=','carnames.id')
-    			->select('carnames.car_name','users.*','cars.*') 
-    			->where('cars.car_status',1)
-    			->orderBy('cars.id', 'DESC')
-    			->get(); 
+    	$data = SelectModel::Approved_Application(); 
 
     	$statement = view('admin/Approved_car_list')
     		->with('allinfo',$data); 
@@ -46,12 +33,7 @@ class ApplicationController extends Controller
     }
 
     public function Application_Single($id){ 
-    	$data = DB::table('cars') 
-    			->join('carnames','cars.carname_id','=','carnames.id') 
-    			->join('users','cars.owner_id','=','users.id') 
-    			->select('carnames.car_name','users.*','cars.*')
-    			->where('cars.id',$id)
-    			->first();   
+    	$data =    SelectModel::Application_Single($id);
 
     	$statement = view('admin/application_single')
     		->with('carinfo',$data); 
@@ -62,38 +44,30 @@ class ApplicationController extends Controller
     public function Application_Approved($id){
     	$data['car_status']=1;//Car status active 
         //driver status find out and if driver status unactive then make it active 
-    	$driver_info=DB::table('cars') 
-    				->join('users','cars.driver_id','=','users.id')
-    				->where('cars.id',$id) 
-    				->select('cars.*','users.*')
-    				->first(); 
-    	$driver_id=$driver_info->id; 
+    	$driver_info = SelectModel::single_driver_info($id);
+       
+
+    	$driver_id=$driver_info->dri_id; 
     	$driver_status=$driver_info->pub_status; 
     	$driver_update['pub_status']=1; 
+
     	if($driver_status==NULL){
-    		DB::table('users')
-		    		->where('id',$driver_id)
-		    		->update($driver_update);
+            SelectModel::single_driver_info_update($driver_id,$driver_update);  
     	}//exit driver activation
 
         //Owner status find out and if Owner status unactive then make it active 
-        $driver_info=DB::table('cars') 
-                    ->join('users','cars.owner_id','=','users.id')
-                    ->where('cars.id',$id) 
-                    ->select('cars.*','users.*')
-                    ->first(); 
+
+        $driver_info= SelectModel::single_owner_info($id); 
         $owner_id=$driver_info->id; 
         $owner_status=$driver_info->pub_status; 
         $owner_update['pub_status']=1; 
         if($owner_status==NULL){
-            DB::table('users')
-                    ->where('id',$owner_id)
-                    ->update($owner_update);
+            SelectModel::single_owner_info_update($owner_id,$owner_update);  
         }//exit Owner activation
 
-    	$action = DB::table('cars')
-		    		->where('id',$id)
-		    		->update($data);   
+    	$action = SelectModel::single_cars_info_update($id,$data);
+         
+
 		$this->_flash_Message($action,'Application Approved Successfully.','Application approved Faild.');
 		return Redirect("/Approved_Application");
     	 
@@ -124,4 +98,8 @@ class ApplicationController extends Controller
             Session::put('class','alert alert-error');
         } 
     }
-}
+
+    public function unapprove_application_count(){
+        return 4;
+    }
+}//Controller Class Start

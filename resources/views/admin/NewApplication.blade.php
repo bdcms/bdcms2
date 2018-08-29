@@ -74,25 +74,29 @@
 							  </tr>
 						  </thead>   
 						  <tbody>
-						  	@foreach($allinfo as $value)   
-							<tr>
-								<td>{{$value->user_name}}</td>
-								<td class="center">{{$value->car_reg_num}}</td>
-								<td class="center">{{$value->car_reg_date}}</td>
-								<td class="center">{{$value->car_name}}</td>
-								<td class="center">
-									<a class="btn btn-success" href="{{URL::to("/ApplicationSingle/$value->id")}}">
-										<i class="halflings-icon white zoom-in"></i>  
-									</a>
-									<a class="btn btn-info" href="#">
-										<i class="halflings-icon white edit"></i>  
-									</a>
-									<a class="btn btn-danger" id="Delete" href="{{URL::to("/Application_Delete/$value->id")}}">
-										<i class="halflings-icon white trash"></i> 
-									</a>
-								</td>
-							</tr> 
-							@endforeach
+						  	@if(count($allinfo)>0)
+							  	@foreach($allinfo as $value)   
+								<tr>
+									<td>{{$value->won_name}}</td>
+									<td class="center">{{$value->car_reg_num}}</td>
+									<td class="center">{{$value->car_reg_date}}</td>
+									<td class="center">{{$value->car_name}}</td>
+									<td class="center">
+										<a class="btn btn-success" href="{{URL::to("/ApplicationSingle/$value->id")}}">
+											<i class="halflings-icon white zoom-in"></i>  
+										</a>
+										<a class="btn btn-info" href="#">
+											<i class="halflings-icon white edit"></i>  
+										</a>
+										<a class="btn btn-danger" id="Delete" href="{{URL::to("/Application_Delete/$value->id")}}">
+											<i class="halflings-icon white trash"></i> 
+										</a>
+									</td>
+								</tr> 
+								@endforeach
+							@else
+								<tr>No Data Found</tr>
+							@endif
 
 						  </tbody>
 					  </table>            

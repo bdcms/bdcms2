@@ -13,9 +13,9 @@ class CarSearchingController extends Controller
 {
     //
     public function CarInformation(CarInfoSearch $request){ 
-    	$district  = $request->district;
-    	$digits    = $request->digits;
-    	$number    = $request->number; 
+    	$district  = trim($request->district);
+    	$digits    = trim($request->digits);
+    	$number    = trim($request->number); 
     	$first     = substr($number, 0, 2);
     	$last      = substr($number, 2, 5);  
         $number    = $district." ".$digits." ".$first."-".$last; 

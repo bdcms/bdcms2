@@ -45,7 +45,7 @@ public function check_user_login(){
 			}else{ //Role Wize Redirection
 				switch ($user_role) {
 					case '1':  
-						Session::put('user_id', $result->id); 
+						Session::put('user_id', $result->user_id); 
 						Session::put('user_name', $result->user_name);
 						Session::put('user_email', $result->user_email); 
 						Session::put('role_id', $user_role);   

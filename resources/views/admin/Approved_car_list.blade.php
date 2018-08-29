@@ -96,17 +96,12 @@
 						  </thead>   
 						  <tbody>
 						  	@foreach($allinfo as $value)
-						  	<?php 
-						        $driver = $value->driver_id;  
-						        $driver_info = DB::table('users')
-						                    ->where('id',$driver)
-						                    ->first();
-						    ?>
+						  	 
 							<tr>
-								<td><a href="#"><a href="owner_single.html">{{$value->user_name}}</a></a></td>
-								<td>{{$value->user_mobile}}</td> 
+								<td><a href="#"><a href="owner_single.html">{{$value->won_name}}</a></a></td>
+								<td>{{$value->won_mobile}}</td> 
 								<td class="center">{{$value->car_reg_num}}</td>
-								<td class="center"><a href="@if(isset($driver_info->id)){{$driver_info->id}}@endif"> @if(isset($driver_info->user_name)){{$driver_info->user_name}}@endif</a></td>
+								<td class="center"><a href="@if(isset($value->dri_id)){{$value->dri_id}}@endif"> @if(isset($value->dri_name)){{$value->dri_name}}@endif </a></td>
 								<td class="center">{{$value->car_name}}</td>
 								
 								<td class="center">

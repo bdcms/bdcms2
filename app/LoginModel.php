@@ -37,7 +37,7 @@ class LoginModel extends Model
 
         switch ($user_role) { 
                 case "1": //
-                    return DB::table('users')           ->where('user_email','=',$email_id)->where('user_password','=',$password)->count(); 
+                    return DB::table('bdc_users')           ->where('user_email','=',$email_id)->where('user_password','=',$password)->count(); 
                 case "2": //Woner  switch 
                     return DB::table('bdc_owners')      ->where('won_email','=',$email_id)->where('won_password','=',$password)->count(); 
                 case "3": //Driver switch 

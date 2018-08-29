@@ -180,9 +180,9 @@
 								</div>
 								<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 								    <div class="controls">
-								    	<input type="number" name="user_mobile"  placeholder="Driver Number..." value="{{old('user_mobile')}}" class="
-								    	@if($errors->first('user_mobile')) field_error @endif">
-								    	<span class="err-msg text-danger">{{$errors->first('user_mobile')}}</span>
+								    	<input type="number" name="dri_mobile"  placeholder="Driver Number..." value="{{old('dri_mobile')}}" class="
+								    	@if($errors->first('dri_mobile')) field_error @endif">
+								    	<span class="err-msg text-danger">{{$errors->first('dri_mobile')}}</span>
 								    </div>
 								</div>
 								</div> 

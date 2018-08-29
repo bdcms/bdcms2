@@ -1,3 +1,4 @@
+
 @extends('master.admin_layout')
 @section('content')
 <ul class="breadcrumb">
@@ -43,39 +44,39 @@
           <tbody>
             <tr>
               <td>Name of woner:</td>
-              <td>{{$carinfo->user_name}}</td> 
+              <td>{{$carinfo->won_name}}</td> 
             </tr>
             <tr>
               <td>Father Name:</td>
-              <td>{{$carinfo->user_fname}}</td> 
+              <td>{{$carinfo->won_fname}}</td> 
             </tr> 
             <tr>
               <td>Address:</td>
-              <td>{{$carinfo->user_address}}</td> 
+              <td>{{$carinfo->won_address}}</td> 
             </tr>
             <tr>
               <td>National ID Number:</td>
-              <td>{{$carinfo->user_nid}}</td> 
+              <td>{{$carinfo->won_nid}}</td> 
             </tr>
             <tr>
               <td>Date of Birth:</td>
-              <td>{{$carinfo->user_birthday}}</td> 
+              <td>{{$carinfo->won_birthday}}</td> 
             </tr>
             <tr>
               <td>Contact Number:</td>
-              <td>{{$carinfo->user_mobile}}</td> 
+              <td>{{$carinfo->won_mobile}}</td> 
             </tr>
             <tr>
               <td>Email:</td>
-              <td>{{$carinfo->user_email}}</td> 
+              <td>{{$carinfo->won_email}}</td> 
             </tr>
             <tr>
               <td>Passport Number:</td>
-              <td>{{$carinfo->user_passport}}</td> 
+              <td>{{$carinfo->won_passport}}</td> 
             </tr>
             <tr>
               <td>Driving Lisence:</td>
-              <td>{{$carinfo->user_lisence}}</td> 
+              <td>{{$carinfo->won_lisence}}</td> 
             </tr>
              
           </tbody>
@@ -107,7 +108,7 @@
             </tr>
             <tr>
               <td>Fitness Car:</td>
-              <td>{{$carinfo->user_lisence}}</td> 
+              <td>{{$carinfo->car_road_permit_no}}</td> 
             </tr>
             <tr>
               <td>Sasis Number:</td>
@@ -122,8 +123,8 @@
         <?php 
           $driver = $carinfo->driver_id;  
            
-          $driver_info = DB::table('users')
-                    ->where('id',$driver)
+          $driver_info = DB::table('bdc_drivers')
+                    ->where('dri_id',$driver)
                     ->first();
         ?>
         <h6>Driver Information</h6>
@@ -136,44 +137,44 @@
             @endif
             <tr>
               <td>Name:</td>
-              <td>{{$driver_info->user_name}}</td> 
+              <td>{{$driver_info->dri_name}}</td> 
             </tr>
             
             <tr>
               <td>Father Name:</td>
-              <td>{{$driver_info->user_fname}}</td> 
+              <td>{{$driver_info->dri_fname}}</td> 
             </tr> 
             <tr>
               <td>Address:</td>
-              <td>{{$driver_info->user_address}}</td> 
+              <td>{{$driver_info->dri_address}}</td> 
             </tr>
             <tr>
               <td>Date of Birth:</td>
-              <td>{{$driver_info->user_birthday}}</td> 
+              <td>{{$driver_info->dri_birthday}}</td> 
             </tr>
              <tr>
               <td>Gender:</td>
-              <td>{{$driver_info->user_gender}}</td> 
+              <td>{{$driver_info->dri_gender}}</td> 
             </tr>
             <tr>
               <td>Driving Lisence No:</td>
-              <td>{{$driver_info->user_lisence}}</td> 
+              <td>{{$driver_info->dri_lisence}}</td> 
             </tr>
             <tr>
               <td>National ID Number:</td>
-              <td>{{$driver_info->user_nid}}</td> 
+              <td>{{$driver_info->dri_nid}}</td> 
             </tr>
             <tr>
               <td>Contact Number:</td>
-              <td>{{$driver_info->user_mobile}}</td> 
+              <td>{{$driver_info->dri_mobile}}</td> 
             </tr>
             <tr>
               <td>Email:</td>
-              <td>{{$driver_info->user_email}}</td> 
+              <td>{{$driver_info->dri_email}}</td> 
             </tr>
             <tr>
               <td>Passport Number:</td>
-              <td>{{$driver_info->user_passport}}</td> 
+              <td>{{$driver_info->dri_passport}}</td> 
             </tr>
               
              
@@ -205,11 +206,15 @@
           <tbody>
             <tr>
               <td>Woner Photo:</td>
-              <td><a target="_blank" href="{{"$carinfo->user_profile_pic"}}"><img style="width: 200px;" src="{{"$carinfo->user_profile_pic"}}"></a></td> 
+              <td><a target="_blank" href="{{"$carinfo->won_profile_pic"}}">
+                <img style="width: 200px;" src="{{"$carinfo->won_profile_pic"}}">
+              </a></td> 
             </tr> 
             <tr>
               <td>Driver Photo:</td>
-              <td><a target="_blank" href="{{"$carinfo->user_profile_pic"}}"><img style="width: 200px;" src="{{$driver_info->user_profile_pic}}"></a></td> 
+              <td><a target="_blank" href="{{"$driver_info->dri_profile_pic"}}">
+                <img style="width: 200px;" src="{{$driver_info->dri_profile_pic}}">
+              </a></td> 
             </tr>
             <tr>
               <td>Car Documents:</td>

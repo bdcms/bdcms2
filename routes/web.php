@@ -90,4 +90,7 @@ Route::get('check_chassis_no',  'FrontController@check_chassis_no');
 Route::get('check_engine_no',   'FrontController@check_engine_no');
 Route::get('check_insurence_no','FrontController@check_insurence_no');
 Route::get('check_licence_no',  'FrontController@check_licence_no');
-Route::get('check_user_login',  'LoginController@check_user_login'); 
+Route::get('check_user_login',  'LoginController@check_user_login'); Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+

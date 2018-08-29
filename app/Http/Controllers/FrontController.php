@@ -37,17 +37,17 @@ class FrontController extends Controller
   
  		session(
  			[
- 				'user_name' 		=> $request->name,
- 				'user_fname' 		=> $request->fname,
- 				'user_nid' 			=> $request->nid,
- 				'user_mobile' 		=> $request->contact_no,
- 				'user_passport' 	=> $request->passport, 
- 				'user_email' 		=> $request->email,
- 				'user_password' 	=> $request->password,
- 				'user_lincence' 	=> $request->licence,
- 				'user_address' 		=> $request->address,  
- 				'user_birth_date' 	=> $request->dateofbirth,
- 				'user_gender' 		=> $request->gender,
+ 				'won_name' 		=> $request->name,
+ 				'won_fname' 		=> $request->fname,
+ 				'won_nid' 			=> $request->nid,
+ 				'won_mobile' 		=> $request->contact_no,
+ 				'won_passport' 	=> $request->passport, 
+ 				'won_email' 		=> $request->email,
+ 				'won_password' 	=> $request->password,
+ 				'won_lisence' 	=> $request->licence,
+ 				'won_address' 		=> $request->address,  
+ 				'won_birthday' 	=> $request->dateofbirth,
+ 				'won_gender' 		=> $request->gender,
  			]
  		); 
  		$this->user_email = $request->email; 
@@ -82,15 +82,23 @@ class FrontController extends Controller
 	            'car_insurence'		=> 'required', 
 	            'car_engine_num'	=> 'required', 
 	            'car_reg_date'		=> 'required|date',
-	            'user_mobile'		=> ['required',
-	            							Rule::exists('users')->where(function ($query) {
-    											$query->where('role_id', 3)->where('car_id', NULL);
+	            'dri_mobile'		=> ['required',
+	            							Rule::exists('bdc_drivers')->where(function ($query) {
+    											$query->where('dri_role', 3)->where('dri_car_id', NULL);
 											}),
 										],
 	        ]);
 
-  			$driver_id = \DB::table('users')->where('user_mobile',$request->user_mobile)->where('role_id',3)->first();  
-	  		$car_reg = $request->car_metro.' '.$request->car_key.' '.$request->car_num;
+    		$district  = trim($request->car_metro);
+	    	$digits    = trim($request->car_key);
+	    	$number    = trim($request->car_num);
+	    	
+    		$first     = substr($number, 0, 2);
+    		$last      = substr($number, 2, 5);  
+    		$car_reg    = $district." ".$digits." ".$first."-".$last; 
+
+  			$driver_id = \DB::table('bdc_drivers')->where('dri_mobile',$request->dri_mobile)->where('dri_role',3)->first();  
+	  		// $car_reg = $request->car_metro.' '.$request->car_key.' '.$request->car_num;
 	 		session(
 	 			[
 	 				'carname_id' 			=> $request->carname_id,
@@ -102,7 +110,7 @@ class FrontController extends Controller
 	 				'car_insurence' 		=> $request->car_insurence,
 	 				'car_road_permit_no' 	=> $request->car_road_permit_no,
 	 				'car_engine_num' 		=> $request->car_engine_num,
-	 				'driver_id'				=> $driver_id->id,
+	 				'driver_id'				=> $driver_id->dri_id,
 	 				'car_color' 			=> $request->car_color, 
 	 			]
 	 		);  
@@ -158,22 +166,22 @@ class FrontController extends Controller
 	    		exit();
 	    	} 
 
-	     $ownId = \DB::table('users')->insertGetId([
-	    	'user_name'			=> session('user_name'),
-	    	'user_fname'		=> session('user_fname'),
-	    	'user_profile_pic'	=> session('user_profile_pic'),
-	    	'user_email'		=> session('user_email'),
-	    	'user_password'		=> md5(session('user_password')),
-	    	'user_mobile'		=> session('user_mobile'),
+	     $ownId = \DB::table('bdc_owners')->insertGetId([
+	    	'won_name'			=> session('won_name'),
+	    	'won_fname'			=> session('won_fname'),
+	    	'won_profile_pic'	=> session('user_profile_pic'),
+	    	'won_email'			=> session('won_email'),
+	    	'won_password'		=> md5(session('won_password')),
+	    	'won_mobile'		=> session('won_mobile'),
 	    	//'car_id'			=> $carId,
-	    	'user_address'		=> session('user_address'),
-	    	'user_birthday'		=> session('user_birth_date'),
-	    	'user_gender'		=> session('user_gender'),
-	    	'driver_id'			=> session('driver_id'),
-	    	'user_passport'		=> session('user_passport'),
-	    	'user_lisence'		=> session('user_lincence'),
-	    	'user_nid'			=> session('user_nid'),
-	    	'role_id'			=> 2, //owner role id
+	    	'won_address'		=> session('won_address'),
+	    	'won_birthday'		=> session('won_birthday'),
+	    	'won_gender'		=> session('won_gender'),
+	    	'won_driver_id'		=> session('driver_id'),
+	    	'won_passport'		=> session('won_passport'),
+	    	'won_lisence'		=> session('won_lisence'),
+	    	'won_nid'			=> session('won_nid'),
+	    	'won_role'			=> 2, //owner role id
 	    	'remember_token'	=> str_random(25)
 	    ]);
 
@@ -197,7 +205,7 @@ class FrontController extends Controller
 	   
 
 
-	    $done = \DB::table('users')->where('id',session('driver_id'))->update(['car_id' => $carId]);
+	    $done = \DB::table('bdc_drivers')->where('dri_id',session('driver_id'))->update(['dri_car_id' => $carId]);
 	    $request->session()->flush();
 	    if($done){ 
         	return redirect('/')->with('msg','Your application submited successfully. Please wait for approvement.');
@@ -238,22 +246,22 @@ class FrontController extends Controller
 		}else{
 			$user_profile_pic = url('Frontend/images/driver/default_driver.png'); 
 		}	 
-		$done( 
-			// 'dri_name'			= $request->name,
-	  //   	'dri_fname'			= $request->fname,
-	  //   	'dri_profile_pic'	= $user_profile_pic,
-	  //   	'dri_email'			= $request->email, 
-	  //   	'dri_password'		= md5($request->password), 
-	  //   	'dri_mobile'		= $request->contact_no,  
-	  //   	'dri_address'		= $request->address, 
-	  //   	'dri_birthday'		= $request->dateofbirth, 
-	  //   	'dri_gender'		= $request->gender,  
-	  //   	'dri_passport'		= $request->passport, 
-	  //   	'dri_lisence'		= $request->licence, 
-	  //   	'dri_nid'			= $request->nid,  
-	  //   	'dri_joining_date'	= date('M,d,Y'),  
-	  //   	'remember_token'	= str_random(25)
-		);
+		$done=[
+			'dri_name'			=> $request->name,
+	    	'dri_fname'			=> $request->fname,
+	    	'dri_profile_pic'	=> $user_profile_pic,
+	    	'dri_email'			=> $request->email, 
+	    	'dri_password'		=> md5($request->password), 
+	    	'dri_mobile'		=> $request->contact_no,  
+	    	'dri_address'		=> $request->address, 
+	    	'dri_birthday'		=> $request->dateofbirth, 
+	    	'dri_gender'		=> $request->gender,  
+	    	'dri_passport'		=> $request->passport, 
+	    	'dri_lisence'		=> $request->licence, 
+	    	'dri_nid'			=> $request->nid,  
+	    	'dri_joining_date'	=> date('M,d,Y'),  
+	    	'remember_token'	=> str_random(25)
+		];
 		$done = DB::table('bdc_drivers')->insert($done);
 		if($done){ 
 			//messageing system
