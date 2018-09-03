@@ -39,6 +39,21 @@
 								    </div>
 									</div>
 								</div>
+
+								<div class="control-group">
+									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
+								    <label class="control-label"><span class="text-danger">*</span> City:</label>
+								    </div>
+								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
+								    <div class="controls">
+								    	<input type="text" name="city" id="car_metro" placeholder="City" value="{{old('city')}}" class="
+								    	@if($errors->first('city')) field_error @endif"> 
+									    <span class="err-msg text-danger">{{$errors->first('city')}}</span>
+									    <div id="areatatus"></div> 
+								    </div>
+									</div>
+								</div>
+
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
 								    <label class="control-label"><span class="text-danger">*</span> NID No:</label>
@@ -174,6 +189,20 @@
 								    	<input type="file" name="image"  class="
 								    	@if($errors->first('image')) field_error @endif">
 								    	<span class="err-msg text-danger">{{$errors->first('image')}}</span>
+								    	<span> ( jpg,png,jpeg ) format are allow & file shold be less than 100kB.</span>
+								    	</div>
+								    </div>
+								</div>
+
+								<div class="control-group">
+									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
+								    <label class="control-label">Lisence Picture:</label>
+								    </div>
+								    <div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
+								    <div class="controls">
+								    	<input type="file" name="licence_image"  class="
+								    	@if($errors->first('licence_image')) field_error @endif">
+								    	<span class="err-msg text-danger">{{$errors->first('licence_image')}}</span>
 								    	<span> ( jpg,png,jpeg ) format are allow & file shold be less than 100kB.</span>
 								    	</div>
 								    </div>

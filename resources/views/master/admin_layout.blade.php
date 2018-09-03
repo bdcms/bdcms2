@@ -8,7 +8,7 @@
 	
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
+	<title>BDCMS</title>
 	<meta name="description" content="Bootstrap Metro Dashboard">
 	<meta name="author" content="Dennis Ji">
 	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
@@ -57,7 +57,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>Metro</span></a> 
+				<a class="brand" href="{{url('/bdcmsadmin')}}"><span>BDCMS</span></a> 
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -321,7 +321,7 @@
 								<li class="dropdown-menu-title">
  									<span>Account Settings</span>
 								</li>
-								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+								<li><a href="{{url("/setting/".Session::get('user_id'))}}"><i class="halflings-icon user"></i> Profile</a></li>
 								<li><a href="{{URL::to('/User_Logout')}}"><i class="halflings-icon off"></i> Logout</a></li>
 							</ul>
 						</li>
@@ -342,12 +342,10 @@
 <div id="sidebar-left" class="span2">
 	<div class="nav-collapse sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked main-menu">
-			<li><a href="{{URL::to('/bdcmsadmin')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-			{{-- <li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>  
-			<li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
-			<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
-			<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li> --}}
+			{{-- Admin Menu ber --}}
 			@if(Session::get('role_id')==1)
+			<li><a href="{{URL::to('/bdcmsadmin')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li> 
+			
 			<li>
 				<a class="dropmenu" href="#"><i class="icon-file-alt"></i><span class="hidden-tablet"> Applications</span>
 					{{-- @if($data>0)<span class="label label-important" style="margin-left: 5px;"> {{$data}}</span>@endif</a> --}}
@@ -379,17 +377,50 @@
 					<li><a class="submenu" href="{{URL::to('/PendingCase')}}"><span class="hidden-tablet"> Pending Case</span></a></li> 
 				</ul>	
 			</li>
+			<li>
+				<a class="dropmenu" href="#"><i class="icon-ban-circle"></i> <span class="hidden-tablet">Setting</span></a>
+				<ul> 
+					<li><a class="submenu" href="{{URL::to('/car_metro')}}"><span class="hidden-tablet"> Car Metro</span></a></li>
+					<li><a class="submenu" href="{{URL::to('/add_keyword')}}"><span class="hidden-tablet"> Metro Keyword</span></a></li> 
+				</ul>	
+			</li>
+			<li><a href="{{URL::to('/admin_notice')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Notice Board</span></a></li> 
+			@endif
+			{{-- Zilla admin menu ber --}}
+			@if(Session::get('role_id')==4)
+			<li><a href="{{URL::to('/subadmin')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	 
+			<li>
+				<a class="dropmenu" href="#"><i class="icon-file-alt"></i><span class="hidden-tablet"> Applications</span> 
+				<ul>
+					<li><a class="submenu" href="{{URL::to('new_app_zilla')}}"><span class="hidden-tablet"> New Applications</span></a></li> 
+					<li><a class="submenu" href="{{URL::to('aprove_zila_app')}}"><span class="hidden-tablet"> Registered Application</span></a></li> 
+				</ul>	
+			</li>
+			<li>
+				<a class="dropmenu" href="#"><i class="icon-user"></i><span class="hidden-tablet"> Official Staff </span></a>
+				<ul>
+					<li><a class="submenu" href="{{URL::to('/zila-new-Profile')}}"><span class="hidden-tablet"> Open New Profile</span></a></li>
+					<li><a class="submenu" href="{{URL::to('/zila-profile-list')}}"><span class="hidden-tablet"> Official staff List</span></a></li> 
+				</ul>	
+			</li>
+			<li>
+				<a class="dropmenu" href="#"><i class="icon-user"></i> <span class="hidden-tablet"> User Information</span></a>
+				<ul>
+					<li><a class="submenu" href="{{URL::to('/zila_driver')}}"><span class="hidden-tablet"> Driver List</span></a></li>
+					<li><a class="submenu" href="{{URL::to('/zila_owner')}}"><span class="hidden-tablet"> Owner List</span></a></li> 
+				</ul>	
+			</li>
+			<li><a href="{{URL::to('/zilla_notice')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Notice Board</span></a></li> 
+			<li>
+				<a class="dropmenu" href="#"><i class="icon-ban-circle"></i> <span class="hidden-tablet">Case Hostory</span></a>
+				<ul>
+					<li><a class="submenu" href="{{URL::to('/WithDraw_Case')}}"><span class="hidden-tablet"> With Draw Case</span></a></li>
+					<li><a class="submenu" href="{{URL::to('/Pending_Case')}}"><span class="hidden-tablet"> Pending Case</span></a></li> 
+				</ul>	
+			</li>
 			@endif
 
-			{{-- <li><a href="{{URL::to('/Cars_Information')}}"><i class="icon-edit"></i><span class="hidden-tablet"> Make Reports</span></a></li>
-			<li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
-			<li><a href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
-			<li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
-			<li><a href="table.html"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
-			<li><a href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
-			<li><a href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
-			<li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
-			<li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li> --}}
+			 
 		</ul>
 	</div>
 </div>
@@ -498,6 +529,53 @@
 
 	<script src="{{URL::to('public/Backend/js/custom.js')}}"></script>
 	<script src="{{URL::to('public/Backend/js/bootbox.js')}}"></script>
+
+
+	<script type="text/javascript">
+			$('#car_metro').keyup(function(){
+				//console.log('check');
+				var area = $(this).val();
+				if(area != ''){
+					$.ajax({
+						url:"{{ url('/area_search') }}",
+						method:"POST",
+						data:{area:area, _token:'{{csrf_token()}}'},
+						success:function(data){
+							$('#areatatus').fadeIn();
+							$('#areatatus').html(data);
+							//console.log(data);
+						}
+					});
+				}
+			$(document).on('click','li',function(){
+				$('#car_metro').val($(this).text());
+				$('#areatatus').fadeOut();
+			});
+			});
+
+
+			$('#keyword').keyup(function(){
+				//console.log('check');
+				var keyword = $(this).val();
+				if(keyword != ''){
+					$.ajax({
+						url:"{{ url('/key_search') }}",
+						method:"POST",
+						data:{keyword:keyword, _token:'{{csrf_token()}}'},
+						success:function(data){
+							$('#keystatus').fadeIn();
+							$('#keystatus').html(data);
+							//console.log(data);
+						}
+					});
+				}
+			$(document).on('click','span',function(){
+				$('#keyword').val($(this).closest("div").text());
+				$('#keystatus').fadeOut();
+			});  
+			});
+
+		</script>
 	 <script type="text/javascript">
     $(document).on("click", "#Delete", function(e){
         e.preventDefault();
@@ -509,6 +587,7 @@
         });
     });
   </script>
+
 	<!-- end: JavaScript-->
 	
 </body>

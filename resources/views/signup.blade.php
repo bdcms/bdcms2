@@ -83,6 +83,19 @@
 									    </div>
 									</div>
 								</div>
+								<div class="control-group">
+									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12">
+									    <label class="control-label"><span class="text-danger">*</span> City:</label>
+									</div>
+									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
+								    <div class="controls">   
+									    <input type="text" name="district" class="input-medium " id="car_metro"  placeholder="City.." value="{{Request::old('district')}}" onchange="distirct_existing_check();"> 
+									  	<span class="err-msg text-danger">{{$errors->first('district')}}</span>
+									  	<div id="areatatus" class="list_suggation"></div>
+									     <div id="car_metro_error_msg"  style="color:#F00;font-weight:800;float: left; margin-top: 15px;"> </div>
+									    </div>
+									</div>
+								</div> 
 
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12">
@@ -134,18 +147,7 @@
 									</div>
 								</div> 
 
-								<div class="control-group">
-									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12">
-									    <label class="control-label"><span class="text-danger">*</span> Address:</label>
-									</div>
-									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
-								    <div class="controls">
-									    	<input type="text" name="address"  placeholder="Address" value="{{old('address')}}" class="
-								    	@if($errors->first('address')) field_error @endif">
-									    	<span class="err-msg text-danger">{{$errors->first('address')}}</span>
-									    </div>
-									</div>
-								</div> 
+								
 
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12">
@@ -255,6 +257,30 @@
 
 
 <script>
+ function distirct_existing_check(){ 
+    var car_metro = $('#car_metro').val();
+    var car_metro = $.trim(car_metro);
+    $.ajax({
+        type: 'get',
+        data: 'car_metro='+car_metro,
+        url: '<?php echo url('check_car_metro_exists'); ?>',
+        success: function(responseText){  
+            if(responseText==1){  //already exist
+                //alert("This Email Id Already Exist");
+                $("#exist").val("1"); //already exist
+                $("#car_metro").css('box-shadow', '2px 0px 0px 0px red'); 
+                $('#car_metro_error_msg').html("");  
+                $("#car_metro").focus();
+                return false;                  
+            }else if(responseText==0){
+                $("#exist").val("0");
+                $("#car_metro").css('border', '');
+                $('#car_metro_error_msg').html("Invalid City Name.");   
+            }
+        }       
+    }); 
+}
+
 function check_email(){ 
 	var email_id = $('#email_id').val();
 	var email_id 	= $.trim(email_id); 
@@ -326,11 +352,11 @@ $(document).on("click", ".myFunction", function(){
 		else{
 			phone_no.css('border', ''); 
 			$('#phone_no_error_msg').html('');
-		}
-	
-	 
+		} 
 	 
   });
+
+
 
 </script>
 	<!-- --------------------------------Welcome Section Exit--------------------------------- -->

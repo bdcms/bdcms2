@@ -6,30 +6,48 @@
 
 			<div class="row">
 				<div class="custom_row clear search_out_wrap">
-					<div class="col-lg-8 col-md-8 col-sm-8"> 
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<h5>Status:</h5>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="search_out_content"><div class="search_out_content"><h5 style="color: red;">Black Listed Car<h5></div></div> 
-							</div>
-						</div>
-						<div class="row">
+					<div class="col-lg-8 col-md-8 col-sm-8">
+					 	<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<h5>Searching Number:</h5>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="search_out_content"><h5>{{$allinfo->car_reg_num}}<h5></div>
 							</div>
-						</div> 
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<h5>Status:</h5>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="search_out_content"><div class="search_out_content">
+									@if(isset($black_list))
+										@if($black_list)
+										<h5 style="color: red;">Black Listed Car<h5>
+										@else
+										<h5 style="color: green;">Clear<h5>
+										@endif
+									@endif
+								</div></div> 
+							</div>
+						</div>
+						 
 
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<h5>Insurence date:</h5>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="search_out_content"><h5 style="color: red;"> Expired with in (12-may-18)<h5></div> 
+								<div class="search_out_content">  
+									@if(isset($ins_date))
+										@if($ins_date==1)
+											<h5 style="color: green;">Available<h5>
+										@else 
+										<h5 style="color: red;"> Expired<h5>
+										@endif
+									@endif
+								
+								</div>
 							</div>
 						</div>
 						
@@ -64,9 +82,9 @@
 								 
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								@if(!empty(Session::get('user_id')))
+								@if(!empty(Session::get('user_id') && Session::get('role_id')==6))
 								<div class="search_out_content">
-									<h5><a href="single.html" data-toggle="modal" data-target="#myModal">Apply For Case</a> </h5>
+									<h5><a href="single.html" data-toggle="modal" data-target="#casemodel">Apply For Case</a> </h5>
 								</div>
 								@endif
 								<div class="search_out_content"><a href="single.html">For Details</a></div> 
@@ -100,7 +118,7 @@
 	</section>
 	<!-- --------------------------------Welcome Section Exit--------------------------------- -->
  	<section>
- 		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+ 		<div id="casemodel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
 		    <div class="modal-dialog case_add" role="document">
 		      	<div class="modal-content"> 
 		        <div class="modal-header">

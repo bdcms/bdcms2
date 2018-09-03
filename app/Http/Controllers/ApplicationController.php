@@ -14,13 +14,10 @@ class ApplicationController extends Controller
 
     
 
-    public function NewApplication(){
-        $area=Session::get('user_posting');  
-    	$data = SelectModel::NewApplication($area);   
-    	$statement = view('admin/NewApplication')
-    		->with('allinfo',$data); 
-    	return view('master.admin_layout')
-    		->with('admin/NewApplication',$statement); 
+    public function NewApplication(){  
+    	$data = SelectModel::NewApplication();   
+    	$statement = view('admin/NewApplication')->with('allinfo',$data); 
+    	return view('master.admin_layout')->with('admin/NewApplication',$statement); 
     }
 
     public function Approved_Application(){ 
@@ -88,6 +85,60 @@ class ApplicationController extends Controller
 		$this->_flash_Message($action,'Application Requirement Message Sending Successfully.','Application Requirement Message Sending Faild.');
 		return Redirect('/NewApplication');
 	}
+
+
+// Zilla Admin Application start//////////////////////////////////////////////////////////////////////////
+    
+    public function new_app_zilla(){
+        $area=Session::get('user_posting'); 
+         
+        $data = SelectModel::NewApplication_zilla($area);    
+        $statement = view('admin/NewApplication')->with('allinfo',$data); 
+        return view('master.admin_layout')->with('admin/NewApplication',$statement); 
+    }  
+
+    public function aprove_zila_app(){ 
+        $area=Session::get('user_posting');  
+        $data = SelectModel::Approved_Application_zilla($area);  
+        $statement = view('admin/Approved_car_list')->with('allinfo',$data); 
+        return view('master.admin_layout')->with('admin/Approved_car_list',$statement);  
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	private function _flash_Message($action, $message, $faield){
         if($action){

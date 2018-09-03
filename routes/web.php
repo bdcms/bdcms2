@@ -19,7 +19,7 @@ Route::get('/',					'FrontController@home');
 Route::get('/ownerinfo',		'FrontController@signup');
 Route::get('/carinfo',			'FrontController@signup1');
 Route::get('/cardocument',		'FrontController@signup2');
-Route::get('/login',			'FrontController@login');
+Route::get('/user_login',		'FrontController@login');
 Route::get('/driverSignup',		'FrontController@driverSignup');
 
 
@@ -48,6 +48,7 @@ Route::get('/hello',			'FrontController@xxx');
 Route::post('/Search_Car',		'CarSearchingController@CarInformation'); 
 Route::get('/Search_Fount',		'CarSearchingController@Search_Fount'); 
 Route::any('/case_submit',		'CarSearchingController@case_submit');
+Route::get('/Search_out',		'CarSearchingController@Search_out');
 
 
 
@@ -62,11 +63,11 @@ Route::post('/Application_Reject/{id}',	  'ApplicationController@Application_Rej
 Route::get('/Application_Delete/{id}',    'ApplicationController@Application_Delete'); 
 
 //New Profile Open Related Controller\
-Route::get('/New_Profile',			'ProfileController@New_Profile'); 
-Route::post('/OpeningNewProfile',	'ProfileController@Opening_NewProfile'); 
-Route::get('/Staff_List',			'ProfileController@Staff_List'); 
-Route::get('/Staff_Single/{id}',	'ProfileController@Staff_Single'); 
-Route::get('/Staff_Delete/{id}',	'ProfileController@Staff_Delete'); 
+Route::get('/New_Profile',					'ProfileController@New_Profile'); 
+Route::post('/newrole',						'ProfileController@newrole'); 
+Route::get('/Staff_List',					'ProfileController@Staff_List'); 
+Route::get('/Staff_Single/{id}/{role}',		'ProfileController@Staff_Single'); 
+Route::get('/Staff_Delete/{id}',			'ProfileController@Staff_Delete'); 
 //DRIVER INFORMATION
 Route::get('/Driver_list',		'ProfileController@Driver_List');
 Route::get('/Owner_List',		'ProfileController@Owner_List'); 
@@ -82,6 +83,36 @@ Route::get('/WithDrawCase',		'CaseController@WithDrawCase');
 Route::get('/PendingCase',		'CaseController@PendingCase');
 Route::get('/Case_Single/{id}', 'CaseController@case_single');
 
+Route::get('/car_metro', 		'DefaultAdminController@car_metro');
+Route::post('/add_metro', 		'DefaultAdminController@add_metro');
+Route::get('/metro_delete/{id}','DefaultAdminController@metro_delete');
+Route::post('/add_keyword', 	'DefaultAdminController@add_keyword');
+Route::get('/keyword_delete/{id}','DefaultAdminController@keyword_delete');
+Route::get('/admin_notice',		'BackendController@admin_notice');
+Route::post('/create_notice',	'BackendController@create_notice');
+
+
+
+
+
+// Site Zilla Admin routing start
+Route::get('subadmin',						'SubAdminController@index');
+Route::get('/new_app_zilla',				'ApplicationController@new_app_zilla');
+Route::get('/zillaApp',			  			'ApplicationController@zillaApp');
+Route::get('/aprove_zila_app',			  	'ApplicationController@aprove_zila_app');
+Route::get('/zila-new-Profile',			  	'ProfileController@zila_new_Profile');
+Route::get('/zila-profile-list',			'ProfileController@zila_profile_list');
+Route::get('/zila_driver',					'ProfileController@zila_driver');
+Route::get('/zila_owner',					'ProfileController@zila_owner');
+Route::get('/zilla_notice',					'BackendController@zilla_notice');
+Route::post('/zilla_notice_submit',			'BackendController@zilla_notice_submit');
+Route::get('/WithDraw_Case',				'CaseController@WithDraw_Case');
+Route::get('/Pending_Case',					'CaseController@Pending_Case');
+
+//Site Upazilla Admin Routeing start
+
+
+
 //Ajax all URL ROUTING 
 Route::get('check_mer_email',   'FrontController@check_mer_email');
 Route::get('check_nid_no',      'FrontController@check_nid_no');
@@ -90,7 +121,17 @@ Route::get('check_chassis_no',  'FrontController@check_chassis_no');
 Route::get('check_engine_no',   'FrontController@check_engine_no');
 Route::get('check_insurence_no','FrontController@check_insurence_no');
 Route::get('check_licence_no',  'FrontController@check_licence_no');
-Route::get('check_user_login',  'LoginController@check_user_login'); Auth::routes();
+Route::get('check_user_login',  'LoginController@check_user_login');
+Route::get('check_identity',  	'ProfileController@check_identity');
+Route::get('check_user_nid',  	'ProfileController@check_user_nid');
+Route::get('check_user_email',  'ProfileController@check_user_email');
+Route::get('check_user_number',  'ProfileController@check_user_number');
+Route::get('check_add_metro_name','DefaultAdminController@check_add_metro_name');
+Route::get('check_add_keyword_name','DefaultAdminController@check_add_keyword_name'); 
+Route::get('check_car_metro_exists','DefaultAdminController@check_car_metro_exists'); 
+Route::get('check_keyword_exists','DefaultAdminController@check_keyword_exists'); 
 
-Route::get('/home', 'HomeController@index')->name('home');
+ 
+// FrontEnd site Routing
+
 

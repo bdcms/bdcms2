@@ -26,17 +26,21 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="logo">
-							<a href="#"><img src="{{url('public/Frontend')}}/images/logo.png"></a>
+							<a href="{{URL::to('/')}}"><img src="{{url('public/Frontend')}}/images/logo.png"></a>
 						</div>
 					</div>
 					<div class="col-sm-10">
 						<nav>
 							<ul class="sf-menu">
 								<li class=" current active"><a href="{{URL::to('/')}}">Home</a></li>
-								<li><a href="about.html">About</a></li>   
-								<li><a href="blog.html">Blog</a></li>
+								<li><a href="{{url('/about')}}">About</a></li>   
+								<li><a href="{{url('/blog')}}">Blog</a></li>
 								<li><a href="contact.html">Contact Us</a></li>
+								@if(!empty(Session::get('user_id') && Session::get('role_id')))
+								<li><a href="{{url('/User_Logout')}}">LogOut</a></li>
+								@else
 								<li><a  data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
+								@endif
 							</ul>
 						</nav>
 					</div>
@@ -148,7 +152,7 @@
 								<div class="footer_content">
 									<ul>
 				                      <li>
-				                        <a href="{{url::to('/login')}}">Upazila/Zilla Login</a>
+				                        <a href="{{url::to('/user_login')}}">Upazila/Zilla Login</a>
 				                      </li> 
 				                      <li> 
 											<a href="{{URL::to('/driverSignup')}}">Driver sign up</a>

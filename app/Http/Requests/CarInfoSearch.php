@@ -24,8 +24,8 @@ class CarInfoSearch extends FormRequest
     public function rules()
     {
         $rules = [
-            'district'      => 'required|exists:tbl_car_reg,district',
-            'digits'        => 'required|exists:tbl_car_reg,keyword|max:3',
+            'district'      => 'required|exists:bdc_metros,metro_name',
+            'digits'        => 'required|exists:bdc_keywords,key_name|max:3',
             'number'        => 'required|numeric|digits:6'
         ];
         return $rules;

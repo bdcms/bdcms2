@@ -25,7 +25,7 @@ class ProfileRequest extends FormRequest
     {
         $rules = [
             'user_name'        => 'required', 
-            'user_email'       => 'required|email|unique:users,user_email', 
+            'user_email'       => 'required|email', 
             'user_mobile'      => 'required|numeric', 
             'user_address'     => 'required', 
             'role_id'          => 'required', 

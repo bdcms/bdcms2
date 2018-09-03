@@ -7,6 +7,13 @@
 		<strong>{{$snap}}</strong> {{$msg}}
 	</div> 
 <?php Session::put('message',null); endif; ?>
+
+@if (session('status'))
+    <div class="alert success_alrt_msg">
+        {{ session('status') }}
+        <button type="button" class="close" data-dismiss="alert">×</button>
+    </div>
+@endif
 @if(Session::get('role_id')==1)
 <ul class="breadcrumb">
 	<li>

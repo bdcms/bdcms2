@@ -57,24 +57,23 @@ public function check_user_login(){
 						Session::put('user_email', $result->won_email); 
 						Session::put('user_pic', $result->won_profile_pic); 
 						Session::put('role_id', $user_role);
-						echo "Sergean profile";exit;
-						return Redirect::to('/bdcmsadmin');
+						 
+						return Redirect::to('/')->with('msg','Login Successfully!.');;
 					case '3': 
 						Session::put('user_id', $result->dri_id); 
 						Session::put('user_name', $result->dri_name);
 						Session::put('user_email', $result->dri_email);
 						Session::put('user_pic', $result->dri_profile_pic);  
-						Session::put('role_id', $user_role);
-						echo "Sergean profile";exit;
-						return Redirect::to('/bdcmsadmin');
+						Session::put('role_id', $user_role); 
+						return Redirect::to('/')->with('msg','Login Successfully!.');;
 					case '4': 
 						Session::put('user_id', $result->zil_id); 
 						Session::put('user_name', $result->zil_name);
 						Session::put('user_email', $result->zil_email);
 						Session::put('user_pic', $result->zil_picture);  
-						Session::put('role_id', $user_role);
-						echo "Sergean profile";exit;
-						return Redirect::to('/bdcmsadmin'); 
+						Session::put('user_posting', $result->zil_working_area);  
+						Session::put('role_id', $user_role); 
+						return Redirect::to('/subadmin'); 
 					case '5': 
 						Session::put('user_id', $result->uzl_id); 
 						Session::put('user_name', $result->uzl_name);
@@ -89,26 +88,17 @@ public function check_user_login(){
 						Session::put('user_email', $result->ser_email);
 						Session::put('user_pic', $result->ser_profile_pic);  
 						Session::put('role_id', $user_role);
-						echo "Sergean profile";exit;
-						return Redirect::to('/bdcmsadmin');
+						// echo "Sergean profile";exit;
+						$car_Reg_Number=Session::get('car_Reg_Number'); 
+						if($car_Reg_Number){
+								Session::put('car_Reg_Number',NULL);
+								return Redirect::to("/Search_out/$car_Reg_Number")->with('msg','Login Successfully!.');
+							}
+							else{ 
+								return Redirect::to('/')->with('msg','Login Successfully!.');
+							}
 				}
-				if($user_role==1){ 
-					return Redirect::to('/bdcmsadmin');
-				}elseif($user_role==2){
-					$this->_flash_Message($result,'Welcome to Owner Profile.','Email or Password invalid.');
-					return Redirect::to('/bdcmsadmin'); 
-				}elseif($user_role==3){
-					$this->_flash_Message($result,'Welcome to Driver profile.','Email or Password invalid.');
-					return Redirect::to('/bdcmsadmin'); 
-				}
-				elseif($user_role==4){
-					 
-					Session::put('user_id', $result->zia_id); 
-					Session::put('user_name', $result->zia_name);
-					Session::put('user_email', $result->zia_email); 
-					Session::put('role_id', $user_role);  
-					return Redirect::to('/bdcmsadmin'); 
-				}
+				 
 			}
 		}else{
 			$this->_flash_Message($result=null,'Email or Password invalid.','Email or Password invalid.'); 
@@ -117,15 +107,23 @@ public function check_user_login(){
     }
 
     public function User_Logout(){
+    	$role=Session::get('role_id');
     	Session::put('alredy_login', NUll);
-    	Session::get('car_Reg_Number',NULL);
-    	Session::get('user_posting',NULL);
+    	Session::put('car_Reg_Number',NULL);
+    	Session::put('user_posting',NULL);
     	Session::put('user_id', NUll);
 		Session::put('user_name', NUll);
 		Session::put('user_email',NUll); 
 		Session::put('role_id', NUll); 
 		Session::put('user_profile_pic', NUll);
-		return Redirect::to("/login");
+		
+		if($role==2 OR $role==3 OR $role==6){ 
+			return Redirect::to("/")->with('msg','Thank you for using BDCM.');
+			}elseif($role==4 OR $role==5){ 
+				return Redirect::to("/user_login")->with('msg','Thank you for using BDCM.');
+			}elseif($role==1){ 
+				return Redirect::to("/admin")->with('msg','Thank you for using BDCM.');
+			}
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Existing;
+use App\SelectModel;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use DB;
@@ -22,32 +23,33 @@ class FrontController extends Controller
     } 
 
     public function appfrom1(Request $request){
+    	$metro = SelectModel::car_metro_search(trim($request->district));
     	$this->validate($request,[
 		            'name'			=> 'required', 
 		            'fname'			=> 'required', 
 		            'nid'			=> 'required|numeric', 
 		            'contact_no'	=> 'required|numeric',
-		            'email'			=> 'required|email|unique:users,user_email',
+		            'email'			=> 'required|email|unique:bdc_owners,won_email',
 		            'password' 		=> 'required|min:6|confirmed',
 					'password_confirmation' => 'required|min:6',  
 		            'dateofbirth'	=> 'required',
 		            'gender'		=> 'required',
-		            'address'		=> 'required'
+		            'district'		=> 'required'
 		        ]);
   
  		session(
  			[
  				'won_name' 		=> $request->name,
- 				'won_fname' 		=> $request->fname,
- 				'won_nid' 			=> $request->nid,
- 				'won_mobile' 		=> $request->contact_no,
+ 				'won_fname' 	=> $request->fname,
+ 				'won_nid' 		=> $request->nid,
+ 				'won_mobile' 	=> $request->contact_no,
  				'won_passport' 	=> $request->passport, 
- 				'won_email' 		=> $request->email,
+ 				'won_email' 	=> $request->email,
  				'won_password' 	=> $request->password,
  				'won_lisence' 	=> $request->licence,
- 				'won_address' 		=> $request->address,  
+ 				'won_city' 		=> $metro->metro_id,  
  				'won_birthday' 	=> $request->dateofbirth,
- 				'won_gender' 		=> $request->gender,
+ 				'won_gender' 	=> $request->gender,
  			]
  		); 
  		$this->user_email = $request->email; 
@@ -96,6 +98,9 @@ class FrontController extends Controller
     		$first     = substr($number, 0, 2);
     		$last      = substr($number, 2, 5);  
     		$car_reg    = $district." ".$digits." ".$first."-".$last; 
+    		$metro = SelectModel::car_metro_search("$request->car_metro");
+
+    		 
 
   			$driver_id = \DB::table('bdc_drivers')->where('dri_mobile',$request->dri_mobile)->where('dri_role',3)->first();  
 	  		// $car_reg = $request->car_metro.' '.$request->car_key.' '.$request->car_num;
@@ -104,7 +109,7 @@ class FrontController extends Controller
 	 				'carname_id' 			=> $request->carname_id,
 	 				'car_wheel' 			=> $request->car_wheel,
 	 				'car_chasis' 			=> $request->car_chasis,
-	 				'car_metro' 			=> $request->car_metro,
+	 				'car_metro' 			=> $metro->metro_id,
 	 				'car_reg_num'			=> $car_reg,
 	 				'car_reg_date'			=> $request->car_reg_date,
 	 				'car_insurence' 		=> $request->car_insurence,
@@ -163,7 +168,7 @@ class FrontController extends Controller
 
 	    	}else{
 	    		echo "no file";
-	    		exit();
+	    		 
 	    	} 
 
 	     $ownId = \DB::table('bdc_owners')->insertGetId([
@@ -174,7 +179,7 @@ class FrontController extends Controller
 	    	'won_password'		=> md5(session('won_password')),
 	    	'won_mobile'		=> session('won_mobile'),
 	    	//'car_id'			=> $carId,
-	    	'won_address'		=> session('won_address'),
+	    	'won_city'			=> session('won_city'),
 	    	'won_birthday'		=> session('won_birthday'),
 	    	'won_gender'		=> session('won_gender'),
 	    	'won_driver_id'		=> session('driver_id'),
@@ -205,7 +210,8 @@ class FrontController extends Controller
 	   
 
 
-	    $done = \DB::table('bdc_drivers')->where('dri_id',session('driver_id'))->update(['dri_car_id' => $carId]);
+	    $done = \DB::table('bdc_drivers')->where('dri_id',session('driver_id'))->update(['dri_car_id' => $carId,'dri_working_are'=>session('won_city')]);
+	    $done = \DB::table('bdc_owners')->where('won_id',$ownId)->update(['won_car_id' => $carId]);
 	    $request->session()->flush();
 	    if($done){ 
         	return redirect('/')->with('msg','Your application submited successfully. Please wait for approvement.');
@@ -225,6 +231,7 @@ class FrontController extends Controller
 		$this->validate($request,[
             'name'			=> 'required', 
             'fname'			=> 'required', 
+            'city'			=> 'required', 
             'nid'			=> 'required|numeric', 
             'contact_no'	=> 'required|numeric',
             'email'			=> 'required|email|unique:bdc_drivers,dri_email',
@@ -235,6 +242,7 @@ class FrontController extends Controller
             'gender'		=> 'required',
             'address'		=> 'required',
             'image'			=> 'mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/svg|max:250', 
+            'licence_image'	=> 'mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/svg|max:250' 
         ]);
 
 		if ($request->hasFile('image') && $request->image->isValid()){
@@ -245,21 +253,34 @@ class FrontController extends Controller
 	        $profile->move(public_path('Frontend/images/driver/'),$imagePath);  
 		}else{
 			$user_profile_pic = url('Frontend/images/driver/default_driver.png'); 
-		}	 
+		}	
+
+		if ($request->hasFile('licence_image') && $request->licence_image->isValid()){
+			$profile = $request->file('licence_image');
+			$imagePath = $request->licence_image->store('');
+			$imagePath = url('Frontend/images/driver/').'/'.$imagePath; 
+			$user_doc_pic = $imagePath;  
+	        $profile->move(public_path('Frontend/images/driver/'),$imagePath);  
+		}else{
+			$errors['licence_image']="Invalid File format"; 
+		} 
+		$city = SelectModel::car_metro_search($request->city);
 		$done=[
 			'dri_name'			=> $request->name,
 	    	'dri_fname'			=> $request->fname,
 	    	'dri_profile_pic'	=> $user_profile_pic,
+	    	'dri_document'		=> $user_doc_pic,
 	    	'dri_email'			=> $request->email, 
 	    	'dri_password'		=> md5($request->password), 
 	    	'dri_mobile'		=> $request->contact_no,  
 	    	'dri_address'		=> $request->address, 
+	    	'dri_working_are'	=> $city->metro_id, 
 	    	'dri_birthday'		=> $request->dateofbirth, 
 	    	'dri_gender'		=> $request->gender,  
 	    	'dri_passport'		=> $request->passport, 
 	    	'dri_lisence'		=> $request->licence, 
 	    	'dri_nid'			=> $request->nid,  
-	    	'dri_joining_date'	=> date('M,d,Y'),  
+	    	'dri_joining_date'	=> date('d-M-y'),  
 	    	'remember_token'	=> str_random(25)
 		];
 		$done = DB::table('bdc_drivers')->insert($done);
@@ -279,6 +300,9 @@ class FrontController extends Controller
     public function login(){ 
     	return view('login');
     }
+
+    
+
     public function checkLogin(Request $request){
     	$this->validate($request,[
             'email'			=> 'required|email', 
@@ -385,18 +409,18 @@ class FrontController extends Controller
 	}
 
 
-    public function district(Request $request){
+    public function district(Request $request){ 
 
-    	$district = \DB::table('tbl_car_reg')
-                ->where('district', 'like', $request->area.'%')
+    	$district = \DB::table('bdc_metros')
+                ->where('metro_name', 'like', $request->area.'%')
                 ->distinct()
                 ->get();
 
         $result = '';
 		$result .= '<div class = "dist"><ul>';
 		if(!empty($district)){
-			foreach ($district->unique('district') as $data) {
-				$result.='<li>'.$data->district.'</li>';
+			foreach ($district->unique('metro_name') as $data) {
+				$result.='<li>'.$data->metro_name.'</li>';
 			}
 		}else{
 			$result .= '<li>Result Not Found</li>';
@@ -406,16 +430,16 @@ class FrontController extends Controller
 
     public function keyword(Request $request){
 
-    	$district = \DB::table('tbl_car_reg')
-                ->where('keyword', 'like', $request->keyword.'%')
+    	$district = \DB::table('bdc_keywords')
+                ->where('key_name', 'like', $request->keyword.'%')
                 ->distinct()
                 ->get();
 
         $result = '';
 		$result .= '<div class = "key">';
 		if(!empty($district)){
-			foreach ($district->unique('keyword') as $data) {
-				$result.='<span>'.$data->keyword.'</span>';
+			foreach ($district->unique('key_name') as $data) {
+				$result.='<span>'.$data->key_name.'</span>';
 			}
 		}else{
 			$result .= '<span>Result Not Found</span>';

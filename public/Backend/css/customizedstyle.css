@@ -23,3 +23,37 @@
     color: red;
     font-size: 12px;
 }
+
+.custom_data_table_box{    margin-left: 0px !important;}
+.control-label span{font-size: 10px !important;color: red !important; font-weight: bold;}
+
+.list_suggation .dist, #keystatus .key {
+    width: 100%;
+    float: left;
+    margin: 0;
+    background: #ccc;
+    padding: 10px 0px;
+}
+.dist ul li, .key span {
+    cursor: pointer;
+    padding: 5px 10px;
+    float: left;
+    width: 100%;
+    color: #000;
+    font-weight: bold;
+}
+.dist ul li:hover, .key span:hover {
+    background: #0083e9;
+}
+.dist ul{ list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    float: left;}
+
+    .list_suggation .dist{
+        width: auto;
+        overflow: hidden;
+    position: absolute;
+    z-index: 9;
+    }

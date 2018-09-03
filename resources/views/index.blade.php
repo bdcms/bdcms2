@@ -24,17 +24,19 @@
 	<div class="col-md-3 col-lg-3 col-sm-12 col-xsm-12"> 
 		<label for="exampleInputEmail1"><span>Example:</span> Khulna</label>
 		<div class="input_box_search">
-  			<input type="text" name="district" class="input-medium " id="car_metro"  placeholder="District.." value="{{Request::old('district')}}"> 
+  			<input type="text" name="district" class="input-medium " id="car_metro"  placeholder="District.." value="{{Request::old('district')}}" onchange="distirct_existing_check();">  
   			<div id="areatatus" class="list_suggation"></div>
-  		</div>
-  		<span class="error_message">{{ $errors->first('district')}} </span>
+        <div id="car_metro_error_msg"  style="color:#F00;font-weight:800;float: left; "> </div>
+        </div>
+        <span class="error_message">{{ $errors->first('district')}} </span>
 	</div>
 
 	<div class="col-md-3 col-lg-3 col-sm-12 col-xsm-12"> 
 		<label for="exampleInputEmail1"><span> Example:</span> HA</label>
 		<div class="input_box_search">
-  			<input type="text" class="input-medium " id="keyword" name="digits" placeholder="Character.." value="{{Request::old('digits')}}">
+  			<input type="text" class="input-medium " id="keyword" name="digits" placeholder="Character.." value="{{Request::old('digits')}}" onchange="keyword_existing_check();">
   			<div id="keystatus"></div> 
+            <div id="keyword_error_msg"  style="color:#F00;font-weight:800;float: left; "> </div>
   		</div>
   		<span class="error_message">{{ $errors->first('digits')}} </span>
 	</div>
@@ -1138,14 +1140,60 @@ function check_car_umber(){
             }else if(responseText==0){
                 $("#exist").val("0");
                 $("#car_metro").css('border', '');
-                $('#car_metro_error_msg').html("This Car Number Not Found."); 
+                $('#car_metro_error_msg').html("Car Number Not Found."); 
                 $("#car_number").focus();
             }
         }       
     }); 
 }
 
- 
+ function distirct_existing_check(){ 
+    var car_metro = $('#car_metro').val();
+    var car_metro = $.trim(car_metro);
+    $.ajax({
+        type: 'get',
+        data: 'car_metro='+car_metro,
+        url: '<?php echo url('check_car_metro_exists'); ?>',
+        success: function(responseText){  
+            if(responseText==1){  //already exist
+                //alert("This Email Id Already Exist");
+                $("#exist").val("1"); //already exist
+                $("#car_metro").css('box-shadow', '2px 0px 0px 0px red'); 
+                $('#car_metro_error_msg').html("");  
+                $("#car_metro").focus();
+                return false;                  
+            }else if(responseText==0){
+                $("#exist").val("0");
+                $("#car_metro").css('border', '');
+                $('#car_metro_error_msg').html("Car Metro Not Found.");   
+            }
+        }       
+    }); 
+}
+
+ function keyword_existing_check(){ 
+    var keyword = $('#keyword').val();
+    var keyword = $.trim(keyword);
+    $.ajax({
+        type: 'get',
+        data: 'keyword='+keyword,
+        url: '<?php echo url('check_keyword_exists'); ?>',
+        success: function(responseText){  
+            if(responseText==1){  //already exist
+                //alert("This Email Id Already Exist");
+                $("#exist").val("1"); //already exist
+                $("#keyword").css('box-shadow', '2px 0px 0px 0px red'); 
+                $('#keyword_error_msg').html("");  
+                $("#keyword").focus();
+                return false;                  
+            }else if(responseText==0){
+                $("#exist").val("0");
+                $("#keyword").css('border', '');
+                $('#keyword_error_msg').html("Invalid Keyword.");   
+            }
+        }       
+    }); 
+}
 
 </script>
 	<!-- --------------------------------Welcome Section Exit--------------------------------- -->

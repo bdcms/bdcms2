@@ -58,14 +58,15 @@
 								</div> 
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
-								    	<label class="control-label"><span class="text-danger">*</span> Car Chassis No:</label>
+								    	<label class="control-label"><span class="text-danger">*</span> Chassis No:</label>
 									</div>
 									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 									    <div class="controls">
 									    	<input type="text" name="car_chasis" id="chassis_no" placeholder="Car Sasis number" value="{{old('car_chasis')}}" class="
 								    	@if($errors->first('car_chasis')) field_error @endif" onchange="chassis_check();">
+								    	<div id="chassis_no_error_msg"  style="color:#F00;font-weight:800;margin-left: 30px;"> </div>
 									    	<span class="err-msg text-danger">{{$errors->first('car_chasis')}}</span>
-									    	<div id="chassis_no_error_msg"  style="color:#F00;font-weight:800"> </div>
+									    	
 									    </div>
 									</div>
 								</div>
@@ -77,31 +78,36 @@
 								    <div class="controls">
 								    	<input type="text" name="car_engine_num" id="engine_no"  placeholder="car Engineen number" value="{{old('car_engine_num')}}" class="
 								    	@if($errors->first('car_engine_num')) field_error @endif" onchange="engine_check();">
+								    	<div id="engine_no_error_msg"  style="color:#F00;font-weight:800;"> </div>
 								    	<span class="err-msg text-danger">{{$errors->first('car_engine_num')}}</span>
-								    	<div id="engine_no_error_msg"  style="color:#F00;font-weight:800"> </div>
+								    	
 								    </div>
 									</div>
 								</div>
 
 								<div class="control-group">
 									<div class="col-md-2 col-lg-2 col-sm-3 col-xsm-12"> 
-								    	<label class="control-label"><span class="text-danger">*</span> Registration No:</label>
+								    	<label class="control-label"><span class="text-danger">*</span> Reg- No:</label>
 									</div>
 									<div class="col-md-10 col-lg-10 col-sm-9 col-xsm-12">
 									    <div class="controls">
+
 									    	<div class="col-md-4 col-lg-4 col-sm-4 col-xsm-12" style="padding-left: 0px;"> 
 									    		<input type="text" name="car_metro" id="car_metro" placeholder="Area" value="{{old('car_metro')}}" class="
-								    	@if($errors->first('car_metro')) field_error @endif"> 
+								    	@if($errors->first('car_metro')) field_error @endif" onchange="distirct_existing_check();"> 
 									    		<span class="err-msg text-danger">{{$errors->first('car_metro')}}</span>
 									    		<div id="areatatus"></div> 
+									    		<div id="car_metro_error_msg"  style="color:#F00;font-weight:800;margin-top: 15px;float: left;"> </div>
 										    </div>
+
 										    <div class="col-md-4 col-lg-4 col-sm-4 col-xsm-12"> 
 									    		<input type="text" name="car_key" id="keyword" placeholder="Charrecter" value="{{old('car_key')}}" class="
-								    	@if($errors->first('car_key')) field_error @endif" >
+								    	@if($errors->first('car_key')) field_error @endif" onchange="keyword_existing_check();">
 									    		<span class="err-msg text-danger">{{$errors->first('car_key')}}</span>
 									    		<div id="keystatus"></div>
-										    	 
+										    	<div id="keyword_error_msg"  style="color:#F00;font-weight:800;margin-top: 17px;float: left;"> </div>
 										    </div>
+
 										    <div class="col-md-4 col-lg-4 col-sm-4 col-xsm-12" style="padding-right: 0px;">  
 									    		<input type="text" name="car_num" id="car_number"  placeholder="Number" value="{{old('car_num')}}" class="
 								    	@if($errors->first('car_num')) field_error @endif" onchange="check_car_umber();">
@@ -269,6 +275,58 @@
 
 <script>
 
+ 
+
+
+
+function distirct_existing_check(){ 
+    var car_metro = $('#car_metro').val();
+    var car_metro = $.trim(car_metro);
+    $.ajax({
+        type: 'get',
+        data: 'car_metro='+car_metro,
+        url: '<?php echo url('check_car_metro_exists'); ?>',
+        success: function(responseText){  
+            if(responseText==1){  //already exist
+                //alert("This Email Id Already Exist");
+                $("#exist").val("1"); //already exist
+                $("#car_metro").css('box-shadow', '2px 0px 0px 0px red'); 
+                $('#car_metro_error_msg').html("");  
+                $("#car_metro").focus();
+                return false;                  
+            }else if(responseText==0){
+                $("#exist").val("0");
+                $("#car_metro").css('border', '');
+                $('#car_metro_error_msg').html("Car Metro Not Found.");   
+            }
+        }       
+    }); 
+}
+
+ function keyword_existing_check(){ 
+    var keyword = $('#keyword').val();
+    var keyword = $.trim(keyword);
+    $.ajax({
+        type: 'get',
+        data: 'keyword='+keyword,
+        url: '<?php echo url('check_keyword_exists'); ?>',
+        success: function(responseText){  
+            if(responseText==1){  //already exist
+                //alert("This Email Id Already Exist");
+                $("#exist").val("1"); //already exist
+                $("#keyword").css('box-shadow', '2px 0px 0px 0px red'); 
+                $('#keyword_error_msg').html("");  
+                $("#keyword").focus();
+                return false;                  
+            }else if(responseText==0){
+                $("#exist").val("0");
+                $("#keyword").css('border', '');
+                $('#keyword_error_msg').html("Invalid Keyword.");   
+            }
+        }       
+    }); 
+}
+
 function check_car_umber(){ 
 	var car_metro  	= $('#car_metro').val();
 	var keyword	   	= $('#keyword').val();
@@ -369,6 +427,8 @@ function check_insurece(){
 		}		
 	});	
 }
+
+
 
  
 
