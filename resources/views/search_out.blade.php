@@ -130,10 +130,11 @@
 		        		{{csrf_field()}}
 							<div class="control-group"> 
 							    <div class="controls">
-							    	<input type="text" name="place"  id="car_metro" placeholder="Insert Case Place..." value="{{Request::old('car_metro')}}">
+							    	<input type="text" name="place"  id="car_metro" placeholder="Insert Case Place..." value="{{Request::old('car_metro')}}" onchange="distirct_existing_check();">
 							    	<span class="error_message">{{ $errors->first('car_metro')}} </span>
 							    	<input type="hidden" name="car_number"  value="{{$allinfo->car_reg_num}}">
 							    	<div id="areatatus" style="position: absolute; margin-top: 34px;width: 91.1%;" class="list_suggation"></div>
+							    	<div id="car_metro_error_msg"  style="color:#F00;font-weight:800;float: left; "> </div>
 							    </div>
 							</div>
 							<div class="control-group"> 
@@ -174,4 +175,30 @@
 		    	</div><!-- /.modal-dialog -->
 		  	</div>
 		</div>
+		<script>
+ 
+
+	function distirct_existing_check(){ 
+	    var car_metro = $('#car_metro').val();
+	    var car_metro = $.trim(car_metro);
+	    $.ajax({
+	        type: 'get',
+	        data: 'car_metro='+car_metro,
+	        url: '<?php echo url('check_car_metro_exists'); ?>',
+	        success: function(responseText){  
+	            if(responseText==1){  //already exist
+	                //alert("This Email Id Already Exist");
+	                $("#exist").val("1"); //already exist
+	                $("#car_metro").css('box-shadow', '2px 0px 0px 0px red'); 
+	                $('#car_metro_error_msg').html("");  
+	                $("#car_metro").focus();
+	                return false;                  
+	            }else if(responseText==0){
+	            	alert(car_metro+" Invalid Area (District) Name.");  
+	            }
+	        }       
+	    }); 
+	}
+</script>
 @endsection
+

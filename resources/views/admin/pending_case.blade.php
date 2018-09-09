@@ -44,14 +44,15 @@
 			  </thead>   
 			  <tbody>
 			  	<?php  
- 					foreach($case_info as $value):  
-
+ 					foreach($case_info as $value): 
+ 					$area= App\SelectModel::select_district_byid($value->case_area);   
 			  	?>
+			  	 
 				<tr> 
 					<td class="center">@if(isset($value->won_name)){{$value->won_name}}@endif</td>
 					<td class="center">@if(isset($value->car_reg_num)){{$value->car_reg_num}}@endif</td>
 					<td class="center">@if(isset($value->case_name)){{$value->case_name}}@endif @if(isset($value->black_list))<span style="color:red;">*</span>@endif</td> 
-					<td class="center">@if(isset($value->case_area)){{$value->case_area}}@endif</td>  
+					<td class="center">@if(isset($area->metro_name)){{$area->metro_name}}@endif</td>  
 					<td class="center">@if(isset($value->dri_name)){{$value->dri_name}}@endif</td> 
 					<td class="center">@if(isset($value->complainant_date)){{$value->complainant_date}}@endif</td>   
 					<td class="center">

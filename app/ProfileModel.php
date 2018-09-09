@@ -56,6 +56,9 @@ class ProfileModel extends Model
     static public function select_sergents_role_profile_($area){
         return DB::table('bdc_sergeants')->where('pub_status',1)->where('ser_working_area',$area)->get();
     }
+    public static function update_upazila_info($data,$id){
+        return DB::table('bdc_upazila_admin')->where('uzl_id','=',$id)->update($data);
+    }
 
     
 

@@ -36,13 +36,14 @@
 								<li><a href="{{url('/about')}}">About</a></li>   
 								<li><a href="{{url('/blog')}}">Blog</a></li>
 								<li><a href="contact.html">Contact Us</a></li>
-								@if(!empty(Session::get('user_id') && Session::get('role_id')))
-								<li><a href="{{url('/User_Logout')}}">LogOut</a></li>
+								@if(!empty(Session::get('user_id') && Session::get('role_id')==6 OR Session::get('role_id')==2 OR Session::get('role_id')==3)) 
+								<li><a data-toggle="modal" data-target=".bs-example-modal-sm" href="">Setting</a></li> 
 								@else
 								<li><a  data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
 								@endif
 							</ul>
 						</nav>
+
 					</div>
 				</div>	
 			</div>
@@ -50,6 +51,28 @@
  </section>
 	
  
+
+<div class="modal fade bs-example-modal-sm setting_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+    	<a href="">
+    		@if(Session::get('user_pic')!=NULL)
+    		<img src="{{Session::get('user_pic')}}"   alt="image">
+    		@else 
+    		<img src="{{URL::to('/public/Frontend/images/team/profile_img.jpg')}}"   alt="image">  
+    		@endif
+    	</a>
+      <h6>{{Session::get('user_name')}}</h6>
+      <div class="setting_content">
+      	<ul>
+      		<li><a href="user_id">Setting</a></li>
+      		<li><a href="#">Help</a></li>
+      	</ul>
+      </div>
+       <h6><a href="{{url('/User_Logout')}}"><i class="fa fa-power-off"></i></a></h6>
+    </div>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="background: url(http://localhost/BDCMS/public/Frontend/images/slider/asd.jpg) no-repeat 0px 0px;background-size: cover;background-attachment: fixed;">

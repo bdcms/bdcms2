@@ -19,7 +19,7 @@ Route::get('/',					'FrontController@home');
 Route::get('/ownerinfo',		'FrontController@signup');
 Route::get('/carinfo',			'FrontController@signup1');
 Route::get('/cardocument',		'FrontController@signup2');
-Route::get('/user_login',		'FrontController@login');
+
 Route::get('/driverSignup',		'FrontController@driverSignup');
 
 
@@ -76,6 +76,7 @@ Route::get('/Help',				'HelpController@index');
 //
 Route::get('/Cars_Information', 'CarsDetailsController@index');
 //Login route
+Route::get('/user_login',		'FrontController@login');
 Route::post('/User_Login',		'LoginController@User_Login');
 Route::get('/User_Logout',		'LoginController@User_Logout'); 
 //Case Related Routing
@@ -90,7 +91,6 @@ Route::post('/add_keyword', 	'DefaultAdminController@add_keyword');
 Route::get('/keyword_delete/{id}','DefaultAdminController@keyword_delete');
 Route::get('/admin_notice',		'BackendController@admin_notice');
 Route::post('/create_notice',	'BackendController@create_notice');
-
 
 
 
@@ -110,6 +110,22 @@ Route::get('/WithDraw_Case',				'CaseController@WithDraw_Case');
 Route::get('/Pending_Case',					'CaseController@Pending_Case');
 
 //Site Upazilla Admin Routeing start
+Route::get('third_admin',						'UpazilaController@index');
+Route::get('upazila_WithDraw_Case',				'CaseController@upazila_WithDraw_Case');
+Route::get('upazila_pending_Case',				'CaseController@upazila_pending_Case');
+Route::get('upazila_setting/{id}',				'UpazilaController@upazila_setting');
+Route::post('upazila_setting_update',			'UpazilaController@upazila_setting_update');
+Route::post('/case_with_draw', 					'CaseController@case_with_draw');
+Route::post('/upazila_car_search', 				'CaseController@upazila_car_search');
+
+
+
+
+
+
+
+
+
 
 
 
@@ -131,7 +147,6 @@ Route::get('check_add_keyword_name','DefaultAdminController@check_add_keyword_na
 Route::get('check_car_metro_exists','DefaultAdminController@check_car_metro_exists'); 
 Route::get('check_keyword_exists','DefaultAdminController@check_keyword_exists'); 
 
- 
 // FrontEnd site Routing
 
 

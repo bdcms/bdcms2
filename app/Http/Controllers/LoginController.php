@@ -29,9 +29,10 @@ public function check_user_login(){
     }
      
 
-    public function User_Login(LoginRequest $request){   
-    	$email 		= trim($request->email);
-		$password 	= trim(md5($request->password));  
+    public function User_Login(LoginRequest $request){  
+
+    	$email 		= $request->email;
+		$password 	= md5($request->password);  
 		$user_role 	= $request->user_role;  
 		$exists 	= LoginModel::check_login_email($email,$password,$user_role);  
 		if ($exists) { 
@@ -39,10 +40,10 @@ public function check_user_login(){
 			$check_login=Session::get('alredy_login'); //Use for backup of case submit with out User login 
 			 
 
-			if($check_login==1){//Use for backup of case submit with out User login
-				Session::put('alredy_login', NUll);
-				return Redirect::to('/Search_Fount');
-			}else{ //Role Wize Redirection
+			// if($check_login==1 && Session::get('role_id')==6){//Use for backup of case submit with out User login
+			// 	Session::put('alredy_login', NUll);
+			// 	return Redirect::to('/Search_Car');
+			// }else{ //Role Wize Redirection
 				switch ($user_role) {
 					case '1':  
 						Session::put('user_id', $result->user_id); 
@@ -55,17 +56,16 @@ public function check_user_login(){
 						Session::put('user_id', $result->won_id); 
 						Session::put('user_name', $result->won_name);
 						Session::put('user_email', $result->won_email); 
-						Session::put('user_pic', $result->won_profile_pic); 
-						Session::put('role_id', $user_role);
-						 
-						return Redirect::to('/')->with('msg','Login Successfully!.');;
+						Session::put('user_pic', $result->won_profile_pic);  
+						Session::put('role_id', $user_role); 
+						return Redirect::to('/')->with('msg','Login Successfully!.');
 					case '3': 
 						Session::put('user_id', $result->dri_id); 
 						Session::put('user_name', $result->dri_name);
 						Session::put('user_email', $result->dri_email);
 						Session::put('user_pic', $result->dri_profile_pic);  
 						Session::put('role_id', $user_role); 
-						return Redirect::to('/')->with('msg','Login Successfully!.');;
+						return Redirect::to('/')->with('msg','Login Successfully!.');
 					case '4': 
 						Session::put('user_id', $result->zil_id); 
 						Session::put('user_name', $result->zil_name);
@@ -73,15 +73,15 @@ public function check_user_login(){
 						Session::put('user_pic', $result->zil_picture);  
 						Session::put('user_posting', $result->zil_working_area);  
 						Session::put('role_id', $user_role); 
-						return Redirect::to('/subadmin'); 
+						return Redirect::to('/subadmin')->with('msg','Login Successfully!.'); 
 					case '5': 
 						Session::put('user_id', $result->uzl_id); 
 						Session::put('user_name', $result->uzl_name);
 						Session::put('user_email', $result->uzl_email);
-						Session::put('user_pic', $result->uzl_picture);  
-						Session::put('role_id', $user_role);
-						echo "Sergean profile";exit;
-						return Redirect::to('/bdcmsadmin');
+						Session::put('user_pic', $result->uzl_picture); 
+						Session::put('user_posting', $result->uzl_working_area);  
+						Session::put('role_id', $user_role); 
+						return Redirect::to('/third_admin')->with('msg','Login Successfully!.');
 					case '6': 
 						Session::put('user_id', $result->ser_id); 
 						Session::put('user_name', $result->ser_name);
@@ -99,7 +99,7 @@ public function check_user_login(){
 							}
 				}
 				 
-			}
+			// }
 		}else{
 			$this->_flash_Message($result=null,'Email or Password invalid.','Email or Password invalid.'); 
 			return Redirect::to("/login");

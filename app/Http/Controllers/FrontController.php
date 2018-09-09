@@ -12,7 +12,36 @@ class FrontController extends Controller
 	public $car_reg_num = ' ';
 
     public function home(){
-    	return view('index');
+    	$info=array();
+    	$cars=SelectModel::selectall_cars_info();
+    	// dd($cars);
+    	$allmetro=SelectModel::select_all_metro_id();
+        $counter = count($allmetro); 
+        
+
+        for ($i=0; $i <$counter ; $i++) {  
+        	$info[$i]["metro"]		= SelectModel::select_district_byid($allmetro[$i]->metro_id); 
+        	$info[$i]["bus"]		= SelectModel::select_district_bus($allmetro[$i]->metro_id,1);  
+        	$info[$i]["track"]		= SelectModel::select_district_track($allmetro[$i]->metro_id,2); 
+        	$info[$i]["motorcycle"]	= SelectModel::select_district_motorcycle($allmetro[$i]->metro_id,3); 
+        	$info[$i]["minibus"]	= SelectModel::select_district_minibus($allmetro[$i]->metro_id,4); 
+        	$info[$i]["total"]		= $info[$i]["bus"]+$info[$i]["track"]+$info[$i]["motorcycle"]+$info[$i]["minibus"]; 
+        }  
+
+
+        for ($i=0; $i <$counter ; $i++) {  
+        	$case[$i]["metro"]		= SelectModel::select_district_byid($allmetro[$i]->metro_id); 
+        	$case[$i]["helmet"]		= SelectModel::select_district_case_bus($allmetro[$i]->metro_id,1);  
+        	$case[$i]["licence"]	= SelectModel::select_district_case_track($allmetro[$i]->metro_id,2); 
+        	$case[$i]["accedent"]	= SelectModel::select_district_case_motorcycle($allmetro[$i]->metro_id,3); 
+        	$case[$i]["missing"]	= SelectModel::select_district_case_minibus($allmetro[$i]->metro_id,4); 
+        	$case[$i]["total"]		= $case[$i]["helmet"]+$case[$i]["licence"]+$case[$i]["accedent"]+$case[$i]["missing"]; 
+        }
+
+        $notice = SelectModel::select_all_notices();
+ 
+
+    	return view('index')->with('cars_info',$info)->with('counter',$counter)->with('cases',$case)->with('nitices',$notice);
     }
 
      
@@ -209,6 +238,11 @@ class FrontController extends Controller
 
 	   
 
+	    $insurence=[
+			'ins_carid'=>session('car_reg_num'),
+			'ins_exp_date'=>date('d-M-y')
+		];
+		$done = DB::table('bdc_insurences')->insert($insurence);
 
 	    $done = \DB::table('bdc_drivers')->where('dri_id',session('driver_id'))->update(['dri_car_id' => $carId,'dri_working_are'=>session('won_city')]);
 	    $done = \DB::table('bdc_owners')->where('won_id',$ownId)->update(['won_car_id' => $carId]);
@@ -248,9 +282,10 @@ class FrontController extends Controller
 		if ($request->hasFile('image') && $request->image->isValid()){
 			$profile = $request->file('image');
 			$imagePath = $request->image->store('');
-			$imagePath = url('Frontend/images/driver/').'/'.$imagePath; 
+			$imagePath = url('public/Frontend/images/driver/').'/'.$imagePath; 
 			$user_profile_pic = $imagePath;  
-	        $profile->move(public_path('Frontend/images/driver/'),$imagePath);  
+	        // $profile->move(public_path('Frontend/images/driver/'),$imagePath);
+	        $profile->move(public_path('Frontend/images/driver/'),$imagePath);   
 		}else{
 			$user_profile_pic = url('Frontend/images/driver/default_driver.png'); 
 		}	
@@ -258,9 +293,11 @@ class FrontController extends Controller
 		if ($request->hasFile('licence_image') && $request->licence_image->isValid()){
 			$profile = $request->file('licence_image');
 			$imagePath = $request->licence_image->store('');
-			$imagePath = url('Frontend/images/driver/').'/'.$imagePath; 
+			$imagePath = url('public/Frontend/images/driver/').'/'.$imagePath; 
 			$user_doc_pic = $imagePath;  
-	        $profile->move(public_path('Frontend/images/driver/'),$imagePath);  
+	        // $profile->move(public_path('Frontend/images/driver/'),$imagePath);
+	        $profile->move(public_path('Frontend/images/driver/'),$imagePath); 
+
 		}else{
 			$errors['licence_image']="Invalid File format"; 
 		} 
@@ -283,7 +320,10 @@ class FrontController extends Controller
 	    	'dri_joining_date'	=> date('d-M-y'),  
 	    	'remember_token'	=> str_random(25)
 		];
+
+
 		$done = DB::table('bdc_drivers')->insert($done);
+
 		if($done){ 
 			//messageing system
 			// \Nexmo::message()->send([

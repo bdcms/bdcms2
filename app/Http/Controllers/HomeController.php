@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB; 
+use Session;
+use App\ProfileModel;
+use App\SelectModel;
+use App\Existing;
+use App\mymodel;
+use Redirect;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+       
+        return view('homfe');
     }
 }

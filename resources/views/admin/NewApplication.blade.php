@@ -94,8 +94,7 @@
 									</td>
 								</tr> 
 								@endforeach
-							@else
-								<tr>No Data Found</tr>
+							 
 							@endif
 
 						  </tbody>

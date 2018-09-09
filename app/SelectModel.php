@@ -26,9 +26,51 @@ class SelectModel extends Model
     	
     }
 
+// Front end site query
+    public static function selectall_cars_info(){
+        return DB::table('cars')->where('car_status',1)->get();
+    }
 
+    //front page car history table info query
+    public static function select_district_bus($dis,$id){
+        return DB::table('cars')->where('car_metro',$dis)->where('carname_id',$id)->count();
+    }
+    public static function select_district_track($dis,$id){
+        return DB::table('cars')->where('car_metro',$dis)->where('carname_id',$id)->count();
+    }
+    public static function select_district_motorcycle($dis,$id){
+        return DB::table('cars')->where('car_metro',$dis)->where('carname_id',$id)->count();
+    }
+    public static function select_district_minibus($dis,$id){
+        return DB::table('cars')->where('car_metro',$dis)->where('carname_id',$id)->count();
+    }
+    public static function select_all_metro_id(){
+        return DB::table('bdc_metros')->get();
+    }
+
+    //front page case history table info query
+    public static function select_district_case_bus($dis,$id){
+        return DB::table('cases')->where('case_area',$dis)->where('case_type_id',$id)->where('case_status',1)->count();
+    }
+    public static function select_district_case_track($dis,$id){
+        return DB::table('cases')->where('case_area',$dis)->where('case_type_id',$id)->where('case_status',1)->count();
+    }
+    public static function select_district_case_motorcycle($dis,$id){
+        return DB::table('cases')->where('case_area',$dis)->where('case_type_id',$id)->where('case_status',1)->count();
+    }
+    public static function select_district_case_minibus($dis,$id){
+        return DB::table('cases')->where('case_area',$dis)->where('case_type_id',$id)->where('case_status',1)->count();
+    }
+
+    //front page all notice query
+    public static function select_all_notices(){
+        return DB::table('bdc_notices')->where('not_status',1)->get();
+    } 
+    
+
+ 
      
-
+// Admin query
     public static function unapprove_application_count(){
         return DB::table('cars')->where('car_status',0)->get();
     }
@@ -168,6 +210,10 @@ class SelectModel extends Model
         return DB::table('bdc_notices')->get();
     }
 
+    public static function select_district_byid($area){
+        return DB::table('bdc_metros')->where('metro_id',$area)->first(); 
+    }
+
     // Frontend site Select Query Start
     public static function single_car_info($number){
         return DB::table('cars')->where('car_reg_num',$number)->first(); 
@@ -181,6 +227,40 @@ class SelectModel extends Model
     }
     public static function select_all_zilla_notice($id,$role){
         return DB::table('bdc_notices')->where('not_cretor',$id)->where('not_role',$role)->get();
+    }
+
+    // public static function select_single_profile_info($id,$role){
+    //     if($role==2){
+    //         $data= DB::table("bdc_owners")->where("won_id",$id)->first(); 
+             
+    //     }elseif($role==3){
+    //         $data= DB::table("bdc_drivers")->where("dri_id",$id)->first(); 
+    //     }elseif($role==6){
+    //         $data= DB::table("bdc_sergeants")->where("ser_id",$id)->first();  
+    //     }
+        
+    // }
+
+
+    // Upazila admin select query
+    public static function select_upazila_admin_info($id){
+        return DB::table('bdc_upazila_admin')->where('uzl_id','=',$id)->first();
+    }
+    public static function find_out_case_widthdraw_name($id,$role){
+        switch ($role) {
+            case '5':
+                $data=DB::table('bdc_upazila_admin')->where('uzl_id','=',$id)->first();
+                return $data->uzl_name;
+                break;
+            case '4':
+                $data=DB::table('bdc_zilla_admins')->where('zil_id','=',$id)->first();
+                return $data->zil_name;
+                break;
+            case '1':
+                $data=DB::table('bdc_users')->where('id','=',$id)->first();
+                return $data->name;
+                break;  
+        }
     }
 
     

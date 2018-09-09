@@ -83,7 +83,7 @@
 			  <thead>
 				  <tr>
 					  <th>Srial No</th>
-					  <th>Metro</th>
+					  <th>Name</th>
 					  <th>Description</th> 
 					  <th>Creator</th> 
 					  <th>Actions</th>
@@ -96,8 +96,8 @@
 				  	 	<tr>
 							<td>{{$i}}</td>
 							<td class="center">{{$notice->not_name}}</td>
-							<td class="center">{{$notice->not_desc}}</td> 
-							<td class="center">{{strip_tags($notice->not_desc)}}</td> 
+							<td class="center">{{strip_tags(str_limit($notice->not_desc, 200),' ')}}</td> 
+							<td class="center"></td> 
 							<td class="center">
 								<a class="btn btn-success" href="{{URL::to("/ApplicationSingle/$notice->not_id")}}">
 									<i class="halflings-icon white zoom-in"></i>  

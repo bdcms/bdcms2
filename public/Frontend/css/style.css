@@ -77,7 +77,7 @@ p{
 font-family: "PlayfairDisplay Bold";
 }
 
-
+.btn:focus{outline: none;}
 
 
 
@@ -941,6 +941,7 @@ width: 200px;
     background: #0083e9;
     font-weight: bold;
     color: #fff;
+    outline: none;
 }
 .sign_in_btn:hover{color: #000;}
 .login_div p a {
@@ -1134,11 +1135,12 @@ width: 100%;
 padding: 10px 0px;
 }
 .frontend_datatable table .sorting{ }
-.frontend_datatable table th span{
+.frontend_datatable table th span,table.dataTable tfoot th, table.dataTable tfoot td{
     font-size: 12px;
     margin: 0;
     padding: 0;
     color: #000;
+    font-family: vardata;
 }
 .frontend_datatable #example_info, #example2_info{margin-top:50px;
 }
@@ -1254,7 +1256,32 @@ border-color: #428bca;}
 .signin_model .modal-header span{font-size: 28px;color: #fff;}
 /*----------------------------------------*/ 
 
-
+.notice_body{
+    height: 200px;
+    overflow-y: scroll !important; 
+}
+.notice_body ul li a span{ font-weight: bold; }
+.setting_model .modal-dialog{float: right;width: 300px;}
+.setting_model .modal-dialog .modal-content{ 
+    float: left;
+    width: 100%;
+    text-align: center;
+    background: #0083e9;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;}
+.setting_model .modal-dialog .modal-content h6{
+    text-align: center;margin:0px; color: #fff;    line-height: 42px;
+}
+.setting_model .modal-dialog .modal-content a img{
+    border-radius: 80px;
+    width: 60px;
+    margin-top: 5px;
+    border: 2px solid #585858;
+}
+.setting_model .modal-dialog .modal-content h6 a{font-size: 25px;color: red;width: 100%;}
+.setting_model .modal-dialog .modal-content .setting_content{padding:15px;background: #fff;}
+.setting_model .modal-dialog .modal-content .setting_content ul li{line-height: 30px;}
 /*-----------------------------------------*/
 
 

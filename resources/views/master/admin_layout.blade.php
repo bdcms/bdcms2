@@ -328,6 +328,7 @@
 						<!-- end: User Dropdown -->
 					</ul>
 				</div>
+				 
 				<!-- end: Header Menu -->
 				
 			</div>
@@ -386,7 +387,7 @@
 			</li>
 			<li><a href="{{URL::to('/admin_notice')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Notice Board</span></a></li> 
 			@endif
-			{{-- Zilla admin menu ber --}}
+			{{-- Zilla admin menu ber ______________________________________________________________________________________ --}}
 			@if(Session::get('role_id')==4)
 			<li><a href="{{URL::to('/subadmin')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	 
 			<li>
@@ -419,7 +420,18 @@
 				</ul>	
 			</li>
 			@endif
-
+			{{-- Upazila admin menu ber ______________________________________________________________________________________ --}}
+			@if(Session::get('role_id')==5)
+			<li><a href="{{URL::to('/third_admin')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	 
+			<li>
+				<a class="dropmenu" href="#"><i class="icon-ban-circle"></i> <span class="hidden-tablet">Case Hostory</span></a>
+				<ul>
+					<li><a class="submenu" href="{{URL::to('/upazila_WithDraw_Case')}}"><span class="hidden-tablet"> With Draw Case</span></a></li>
+					<li><a class="submenu" href="{{URL::to('/upazila_pending_Case')}}"><span class="hidden-tablet"> Pending Case</span></a></li> 
+				</ul>	
+			</li>
+			<li><a href="{{URL::to('/upazila_setting/'.Session::get('user_id'))}}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Setting</span></a></li>
+			@endif
 			 
 		</ul>
 	</div>

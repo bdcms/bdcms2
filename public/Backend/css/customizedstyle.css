@@ -57,3 +57,25 @@
     position: absolute;
     z-index: 9;
     }
+
+.upazila_admin_info li label{
+    float: left;width: 40%;
+}
+.upazila_car_search .well,.upazila_car_search{padding: 0px;background: none;}
+.upazila_car_search .well .navbar-form .form-group input[type="number"]{
+    margin: 0px;
+    border: 0px;
+    padding: 20px 20px;
+    float: left;
+    width: 80%; 
+    background: #ddd;
+}
+.upazila_car_search .well .navbar-form button{
+    padding: 4px;
+    text-align: center;
+    width: 16.34%;
+    background: #0083e9;
+    margin: 0;
+ 
+
+} 

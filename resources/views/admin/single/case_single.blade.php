@@ -1,12 +1,19 @@
-
+ 
 @extends('master.admin_layout')
 @section('content')
+<?php use App\Http\Controllers\CaseController; ?>
 <?php if($msg = Session::get('message')): $class = Session::get('class'); if($class=='alert alert-success'){$snap='Well done! ';}else{$snap='Oh snap! ';}?> 
  	<div class="{{$class}} success_alrt_msg">
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<strong>{{$snap}}</strong> {{$msg}}
 	</div> 
 <?php Session::put('message',null); endif; ?>
+@if (session('msg'))
+    <div class="alert alert-success">
+        {{ session('msg') }}
+        <button type="button" class="close" data-dismiss="alert">×</button>
+    </div>
+@endif
 <ul class="breadcrumb">
 	<li>
 		<i class="icon-home"></i>
@@ -53,19 +60,44 @@
 	                </tr> 
 	                <tr>
 	                  <td>Case Area:</td>
-	                  <td>{{strip_tags($case_info->case_area)}}</td> 
+	                  <td>{{strip_tags($area->metro_name)}}</td> 
 	                </tr>
 	                <tr>
 	                  <td>Metro:</td>
-	                  <td>{{strip_tags($case_info->car_metro)}}</td> 
+	                  <td>{{strip_tags($metro->metro_name)}}</td> 
 	                </tr>
+
+	                @if(isset($case_info->withdraw_date))
+	                <tr>
+	                  <td>Case With draw Date:</td>
+	                  <td><a href="#">{{$case_info->withdraw_date}}</a></td> 
+	                </tr>
+	                @endif
+
+	                
+	                @if(isset($case_info->withdraw_id))
+	                <?php 
+	                	$name=CaseController::find_out_case_widthdraw_name($case_info->withdraw_id,$case_info->withdraw_role);
+	                ?>
+	                <tr>
+	                  <td>Case With draw Person:</td>
+	                  <td><a href="#">{{$name}}</a></td> 
+	                </tr>
+	                @endif
+
 	                <tr>
 	                  <td>Case Status:</td>
 	                  <td>
 	                  	@if($case_info->case_status==1)
-	                  	<a class="" href="{{URL::to("/Case_Single/$case_info->id")}}"><span class="label label-important">Pending</span></a> 
+	                  	<form action="{{url("/case_with_draw")}}" method="Post"> 
+	                  		{{csrf_field()}} 
+	                  		<input type="hidden" name="case_id" value="{{$case_info->id}}">
+							<button type="submit" class="btn btn-primary">With Draw Case</button> 
+						</form>
 						@else
-						<a class="" href="#"><span class="label label-success">Withdraw</span></a>
+						<form action="" method="Post">
+							<span class="label label-success">Withdraw</span>
+						</form>
 						@endif
 	                  </td> 
 	                </tr> 
@@ -99,12 +131,16 @@
 			  <tbody>
 			  	@if(count($morecase)>0)  
  				@foreach($morecase as $value)
+
+ 				<?php 
+ 					$pen_area= CaseController::select_district_name($value->case_area);
+ 				?>
 			  	 
 				<tr> 
 					<td class="center">@if(isset($value->won_name)){{$value->won_name}}@endif</td>
 					<td class="center">@if(isset($value->car_reg_num)){{$value->car_reg_num}}@endif</td>
 					<td class="center">@if(isset($value->case_name)){{$value->case_name}}@endif @if(isset($value->black_list))<span style="color:red;">*</span>@endif</td> 
-					<td class="center">@if(isset($value->case_area)){{$value->case_area}}@endif</td>  
+					<td class="center">@if(isset($pen_area->metro_name)){{$pen_area->metro_name}}@endif</td>  
 					<td class="center">@if(isset($value->dri_name)){{$value->dri_name}}@endif</td> 
 					<td class="center">@if(isset($value->complainant_date)){{$value->complainant_date}}@endif</td>   
 					<td class="center">

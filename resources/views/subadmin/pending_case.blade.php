@@ -1,11 +1,11 @@
 @extends('master.admin_layout')
 @section('content')
-<?php if($msg = Session::get('message')): $class = Session::get('class'); if($class=='alert alert-success'){$snap='Well done! ';}else{$snap='Oh snap! ';}?> 
- 	<div class="{{$class}} success_alrt_msg">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>{{$snap}}</strong> {{$msg}}
-	</div> 
-<?php Session::put('message',null); endif; ?>
+ @if (session('msg'))
+    <div class="alert success_alrt_msg">
+        {{ session('msg') }}
+        <button type="button" class="close" data-dismiss="alert">×</button>
+    </div>
+@endif
 <ul class="breadcrumb">
 	<li>
 		<i class="icon-home"></i>
@@ -51,7 +51,7 @@
 					<td class="center">@if(isset($value->won_name)){{$value->won_name}}@endif</td>
 					<td class="center">@if(isset($value->car_reg_num)){{$value->car_reg_num}}@endif</td>
 					<td class="center">@if(isset($value->case_name)){{$value->case_name}}@endif @if(isset($value->black_list))<span style="color:red;">*</span>@endif</td> 
-					<td class="center">@if(isset($value->case_area)){{$value->case_area}}@endif</td>  
+					<td class="center">@if(isset($area->metro_name)){{$area->metro_name}}@endif</td>  
 					<td class="center">@if(isset($value->dri_name)){{$value->dri_name}}@endif</td> 
 					<td class="center">@if(isset($value->complainant_date)){{$value->complainant_date}}@endif</td>   
 					<td class="center">

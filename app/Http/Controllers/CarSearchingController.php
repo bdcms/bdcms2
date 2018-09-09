@@ -35,8 +35,9 @@ class CarSearchingController extends Controller
 
 
             $black_list = SelectModel::single_car_case_info($action->id); 
-            Session::put('car_Reg_Number',$number);//Use for backup of case submit without User login
-            Session::put('alredy_login',1); //Use for backup of case submit without User login
+            // Session::put('car_Reg_Number',$number);//Use for backup of case submit without User login
+            // Session::put('alredy_login',1); //Use for backup of case submit without User login
+            
     		$statement = view('search_out')->with('allinfo',$action)->with('black_list',$black_list)->with('ins_date',$ins_date); 
             return view('master.master')->with('search_out',$statement);
         }else{

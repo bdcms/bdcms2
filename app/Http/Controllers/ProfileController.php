@@ -71,8 +71,14 @@ class ProfileController extends Controller
                 $table = 'bdc_sergeants';  
             } 
     	$output =  ProfileModel::new_user_role_insert($data,$table); 
-		return Redirect("/bdcmsadmin")->with('status', 'Profile Create Successfully!');
+		return Redirect("/bdcmsadmin")->with('msg', 'Profile Update Successfully!');
     }
+
+
+
+    // public static function select_single_profile_info($id,$role){ 
+    //     return SelectModel::select_single_profile_info($id,$role);
+    // }
 
 
     public function Staff_List(){ 

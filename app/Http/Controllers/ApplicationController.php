@@ -41,7 +41,9 @@ class ApplicationController extends Controller
     public function Application_Approved($id){
     	$data['car_status']=1;//Car status active 
         //driver status find out and if driver status unactive then make it active 
-    	$driver_info = SelectModel::single_driver_info($id);
+
+        $driver_info = SelectModel::single_driver_info($id);
+       
        
 
     	$driver_id=$driver_info->dri_id; 
@@ -54,19 +56,18 @@ class ApplicationController extends Controller
 
         //Owner status find out and if Owner status unactive then make it active 
 
-        $driver_info= SelectModel::single_owner_info($id); 
-        $owner_id=$driver_info->id; 
-        $owner_status=$driver_info->pub_status; 
+        $owner_info= SelectModel::single_owner_info($id); 
+         
+        $owner_id=$owner_info->won_id; 
+        $owner_status=$owner_info->pub_status; 
         $owner_update['pub_status']=1; 
-        if($owner_status==NULL){
+        if($owner_status==0){
             SelectModel::single_owner_info_update($owner_id,$owner_update);  
         }//exit Owner activation
 
     	$action = SelectModel::single_cars_info_update($id,$data);
-         
-
-		$this->_flash_Message($action,'Application Approved Successfully.','Application approved Faild.');
-		return Redirect("/Approved_Application");
+          
+		return Redirect("/Approved_Application")->with('msg','Application Approve Successfully.');
     	 
 	}
 
@@ -90,8 +91,7 @@ class ApplicationController extends Controller
 // Zilla Admin Application start//////////////////////////////////////////////////////////////////////////
     
     public function new_app_zilla(){
-        $area=Session::get('user_posting'); 
-         
+        $area=Session::get('user_posting');  
         $data = SelectModel::NewApplication_zilla($area);    
         $statement = view('admin/NewApplication')->with('allinfo',$data); 
         return view('master.admin_layout')->with('admin/NewApplication',$statement); 
