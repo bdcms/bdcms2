@@ -79,3 +79,9 @@
  
 
 } 
+
+.driver_profile_setting .form-horizontal .controls{margin: 0px;}
+.driver_profile_setting .form-horizontal .controls input{float: left;width: 95%;}
+.driver_profile_setting .form-horizontal .control-label{float: left;width: 100%;}
+.alert {position: absolute;width: 90%;line-height: 50px;font-size: 16px;z-index: 9;}
+.err-msg,.ajax_msg{font-size: 12px;color: red;}

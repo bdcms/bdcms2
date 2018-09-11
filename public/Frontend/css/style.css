@@ -1278,15 +1278,68 @@ border-color: #428bca;}
     width: 60px;
     margin-top: 5px;
     border: 2px solid #585858;
+    height: 60px;
 }
 .setting_model .modal-dialog .modal-content h6 a{font-size: 25px;color: red;width: 100%;}
 .setting_model .modal-dialog .modal-content .setting_content{padding:15px;background: #fff;}
 .setting_model .modal-dialog .modal-content .setting_content ul li{line-height: 30px;}
 /*-----------------------------------------*/
+.err-msg,.ajax_msg{font-size: 12px;color: red;}
+.green, .green [class="box-header"], .green.box, .slider.green .ui-slider-range, .progress.green .ui-progressbar-value, .sliderVertical.green .ui-slider-range, .progressSlim.green .ui-progressbar-value, .label-success, .badge-success {
+    background: #00A300 !important;
+    border-color: #00A300 !important;
+    color: #fff;
+}
+.row-fluid [class*="span"] {
+    display: block;
+    float: left;
+    width: 100%;
+    min-height: 30px;
+    margin-left: 2.564102564102564%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.statbox {
+    height: 120px;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 28px;
+}
+.statbox .number {
+    font-size: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.statbox .title {
+    font-size: 16px;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+.statbox .footer {
+    background: rgba(0,0,0,.1);
+    background-color: #19FFFFFF;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+}
+.yellow, .yellow [class="box-header"], .yellow.box, .slider.yellow .ui-slider-range, .progress.yellow .ui-progressbar-value, .sliderVertical.yellow .ui-slider-range, .progressSlim.yellow .ui-progressbar-value, .label-warning, .badge-warning {
+    background: #FFC40D !important;
+    border-color: #FFC40D !important;
+    color: #fff;
+}
+.pink, .pink [class="box-header"], .pink.box, .slider.pink .ui-slider-range, .progress.pink .ui-progressbar-value, .sliderVertical.pink .ui-slider-range, .progressSlim.pink .ui-progressbar-value {
+    background: #9F00A7 !important;
+    border-color: #9F00A7 !important;
+    color: #fff;
+}
 
+.frontend_datatable #example .action_btn .fa{font-size: 16px;}
 
-
-
+.action_btn form{width: 72px;float: left;}
 
 
 

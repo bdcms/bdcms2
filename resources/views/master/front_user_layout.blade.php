@@ -56,7 +56,7 @@
 <div class="modal fade bs-example-modal-sm setting_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm">
 
-    @if(Session::get('role_id')==2)
+    @if(Session::get('role_id')==2)<!--Dropdwon menu for Owner profile ------------------------------ -->
 	    <div class="modal-content">
 	    	<a href="{{url('/owner-profile')}}">
 	    		@if(Session::get('user_pic')!=NULL)
@@ -69,7 +69,7 @@
 	      <div class="setting_content"> 
 	      	<ul>
 	      		<li><a  href="{{url('/owner-profile')}}">Profile</a></li>
-	      		<li><a href="user_id">Setting</a></li>
+	      		<li><a href="{{url('/owner-setting/'.Session::get('user_id'))}}">Setting</a></li>
 	      		<li><a href="#">Help</a></li>
 	      	</ul> 
 	      </div>
@@ -77,7 +77,7 @@
 	    </div>
     @endif
 
-    @if(Session::get('role_id')==3)
+    @if(Session::get('role_id')==3)<!--Dropdwon menu for Driver profile ------------------------------ -->
 	    <div class="modal-content">
 	    	<a href="{{url('/driver-profile')}}">
 	    		@if(Session::get('user_pic')!=NULL)
@@ -90,7 +90,7 @@
 	      <div class="setting_content"> 
 	      	<ul>
 	      		<li><a  href="{{url('/driver-profile')}}">Profile</a></li>
-	      		<li><a href="user_id">Setting</a></li>
+	      		<li><a href="{{url('/driver-setting/'.Session::get('user_id'))}}">Setting</a></li>
 	      		<li><a href="#">Help</a></li>
 	      	</ul> 
 	      </div>
@@ -167,11 +167,36 @@
   </div>
 </div>
 
-
-
-
-
+<div class="col-sm-12 col-md-2 col-lg-2"><!-----Front User Sidebar Menu --------------------------------------------------------------->
+	<div class="row">
+		<div class="front_user_nav">
+			<nav>
+				@if(Session::get('role_id')==3)
+				<ul class="nav"> 
+					<li><a href="{{url('/driver-profile')}}">Driver Home</a></li>
+					<li><a href="{{url('/driver-setting/'.Session::get('user_id'))}}">Profile Update</a></li>
+				</ul>
+				@elseif(Session::get('role_id')==2)
+				<ul class="nav"> 
+					<li><a href="{{url('/owner-profile')}}">Owner Home</a></li>
+					<li><a href="{{url('/owner-setting/'.Session::get('user_id'))}}">Profile Update</a></li>
+				</ul>
+				@elseif(Session::get('role_id')==6)
+				<ul class="nav"> 
+					<li><a href="{{url('/sergeant-profile')}}">Sergeant Home</a></li>
+					<li><a href="{{url('/sergeant-setting/'.Session::get('user_id'))}}">Profile Update</a></li>
+				</ul>
+				@endif
+			</nav>
+		</div>
+	</div>
+</div>
+<div class="col-sm-12 col-md-10 col-lg-10"> 
 	@yield('content')
+</div>
+
+
+
 
 
 

@@ -184,9 +184,7 @@ class SelectModel extends Model
             ->orderBy('cars.id', 'DESC')
             ->get();
     }  
-    public static function car_metro_search($data){
-        return DB::table('bdc_metros')->where('metro_name',$data)->first(); 
-    }
+    
 
     public static function zila_driver_list_out($area){
         return DB::table('bdc_drivers')  
@@ -210,8 +208,11 @@ class SelectModel extends Model
         return DB::table('bdc_notices')->get();
     }
 
-    public static function select_district_byid($area){
-        return DB::table('bdc_metros')->where('metro_id',$area)->first(); 
+    public static function select_district_byid($id){//find out city by id --------------------------------
+        return DB::table('bdc_metros')->where('metro_id',$id)->first(); 
+    }
+    public static function car_metro_search($data){
+        return DB::table('bdc_metros')->where('metro_name',$data)->first(); 
     }
 
     // Frontend site Select Query Start
@@ -227,6 +228,9 @@ class SelectModel extends Model
     }
     public static function select_all_zilla_notice($id,$role){
         return DB::table('bdc_notices')->where('not_cretor',$id)->where('not_role',$role)->get();
+    }
+    public static function Single_car_select_info_byID($id){
+        return DB::table('cars')->where('id',$id)->first(); 
     }
 
     // public static function select_single_profile_info($id,$role){
@@ -261,6 +265,26 @@ class SelectModel extends Model
                 return $data->name;
                 break;  
         }
+    }
+
+    //Driver All select function
+   
+    public static function driver_email_id_check($id){
+        return DB::table('bdc_drivers')->where('dri_id',$id)->first();
+    }
+
+
+
+    //Owner All select function
+   
+    public static function owner_email_id_check($id){
+        return DB::table('bdc_owners')->where('won_id',$id)->first();
+    }
+
+     //Sergeant All select function
+   
+    public static function sergeant_email_id_check($id){
+        return DB::table('bdc_sergeants')->where('ser_id',$id)->first();
     }
 
     

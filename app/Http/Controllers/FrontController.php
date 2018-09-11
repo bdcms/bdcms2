@@ -216,6 +216,7 @@ class FrontController extends Controller
 	    	'won_lisence'		=> session('won_lisence'),
 	    	'won_nid'			=> session('won_nid'),
 	    	'won_role'			=> 2, //owner role id
+	    	'won_joining_date'	=> date('d-M-y'),
 	    	'remember_token'	=> str_random(25)
 	    ]);
 
